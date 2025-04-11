@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>La constante manquante</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.amber.min.css"/>
+    <style>
+      :root {
+        --pico-font-family: 'EB Garamond', serif;
+        --font-scale: 1;
+        --accent-color: #9e7929; /* couleur pour mode clair */
+      }
+
+      [data-theme="dark"] {
+        --accent-color: #e1ca88; /* couleur pour mode sombre */
+      }
+
+      html {
+        font-family: var(--pico-font-family);
+        font-size: calc(100% * var(--font-scale));
+      }
+
+      section {
+        scroll-margin-top: 6rem;
+      }
+
+      /* ----- Mise en forme de la navigation ----- */
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--pico-background-color);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--pico-muted-border-color, #ccc);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-left,
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      @media (max-width: 600px) {
+        .nav-left {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-right {
+          justify-content: flex-end;
+        }
+      }
+
+      /* ----- Icônes (drapeaux + thème) ----- */
+
+      .flag {
+        width: 24px;
+        height: auto;
+        cursor: pointer;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+
+      /* ----- Boutons de taille de police ----- */
+
+      .font-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .font-buttons button {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.6rem;
+        line-height: 1;
+      }
+
+      /* ----- Affichage conditionnel des langues ----- */
+
+      [data-lang]:not([data-lang="fr"]) .fr,
+      [data-lang]:not([data-lang="en"]) .en {
+        display: none;
+      }
+
+      /* ----- Couleur personnalisée des titres ----- */
+
+      nav strong,
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--accent-color);
+      }
+
+      /* ----- Images et paragraphes  ---- */
+      .illustrated-paragraph {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-block: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .illustrated-paragraph.start {
+        flex-direction: row;
+      }
+
+      .illustrated-paragraph.end {
+        flex-direction: row-reverse;
+      }
+
+      .illustrated-paragraph figure {
+        flex-shrink: 0;
+        max-width: 360px;
+      }
+
+      .illustrated-paragraph img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+      }
+
+      .illustrated-paragraph .text {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      @media (max-width: 600px) {
+        .illustrated-paragraph {
+          flex-direction: column !important;
+          align-items: center;
+        }
+
+        .illustrated-paragraph figure,
+        .illustrated-paragraph .text {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+
+    </style>
+  </head>
+  <body data-lang="fr">
+    <header class="container">
+      <nav>
+        <div class="nav-right">
+          <img src="https://flagcdn.com/fr.svg" alt="FR" class="flag" onclick="setLang('fr')"/>
+          <img src="https://flagcdn.com/us.svg" alt="EN" class="flag" onclick="setLang('en')"/>
+          <div class="font-buttons">
+            <button onclick="adjustFont(-0.1)" title="Réduire la taille de police">A−</button>
+            <button onclick="adjustFont(+0.1)" title="Augmenter la taille de police">A+</button>
+          </div>
+          <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">🌞</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section id="book">
+        <h2 class="fr">Bientôt !</h2>
+        <h2 class="en">Soon !</h2>
+      </section>
+
+    </main>
+
+    <script>
+      // Lang switcher
+      function setLang(lang) {
+        document.body.dataset.lang = lang
+        localStorage.setItem("lang", lang)
+      }
+
+      const savedLang = localStorage.getItem("lang")
+      if (savedLang) setLang(savedLang)
+
+      // Theme toggle
+      function toggleTheme() {
+        const html = document.documentElement
+        const btn = document.querySelector(".theme-toggle")
+        const isDark = html.getAttribute("data-theme") === "dark"
+        html.setAttribute("data-theme", isDark ? "light" : "dark")
+        btn.textContent = isDark ? "🌞" : "🌙"
+        localStorage.setItem("theme", isDark ? "light" : "dark")
+      }
+
+      const savedTheme = localStorage.getItem("theme")
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme)
+        document.querySelector(".theme-toggle").textContent = savedTheme === "dark" ? "🌙" : "🌞"
+      }
+
+      function adjustFont(delta) {
+        const root = document.documentElement
+        let scale = parseFloat(getComputedStyle(root).getPropertyValue('--font-scale')) || 1
+        scale = Math.min(1.6, Math.max(0.8, +(scale + delta).toFixed(2)))
+        root.style.setProperty('--font-scale', scale)
+        localStorage.setItem('fontScale', scale)
+      }
+
+      const savedFontScale = localStorage.getItem('fontScale')
+      if (savedFontScale) {
+        document.documentElement.style.setProperty('--font-scale', savedFontScale)
+      }
+
+      function updateScrollMargin() {
+        const header = document.querySelector('header')
+        const headerHeight = header.offsetHeight
+
+        document.querySelectorAll('section[id]').forEach(section => {
+          section.style.scrollMarginTop = `${headerHeight + 16}px` // petit offset visuel
+        })
+      }
+
+      // initial setup
+      updateScrollMargin();
+
+      // mettre à jour si la fenêtre est redimensionnée
+      window.addEventListener('resize', updateScrollMargin)
+    </script>
+  </body>
+</html>
