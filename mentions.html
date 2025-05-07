@@ -19,10 +19,11 @@
       <h2>1. Éditeur du site</h2>
       <p><strong>S. Nichèle</strong></p>
       <p>Contact postal :<br>
-        À l’attention de S. Nichèle<br>
-        [Ton adresse postale complète]<br>
+        S. Nichèle<br>
+        Allée des cèdres
+        60270 GOUVIEUX<br>
         France</p>
-      <p>Email : <a href="mailto:ton.email@example.com">ton.email@example.com</a></p>
+      <p>Email : <a href="#" id="email-link">[email protégé]</a></p></p>
 
       <h2>2. Directeur de la publication</h2>
       <p><strong>S. Nichèle</strong></p>
@@ -53,5 +54,12 @@
       </p>
 
     </main>
+    <script>
+      const user = "contact";
+      const domain = "laconstantemanquante.com";
+      const link = document.getElementById("email-link");
+      link.href = `mailto:${user}@${domain}`;
+      link.textContent = `${user}@${domain}`;
+    </script>
   </body>
 </html>
