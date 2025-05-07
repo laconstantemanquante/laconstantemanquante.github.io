@@ -7,8 +7,59 @@
     <link rel="stylesheet" href="./css/fonts.css"/>
     <link rel="stylesheet" href="./css/pico.amber.min.css"/>
     <link rel="stylesheet" href="./css/styles.css"/>
+    <script>
+      const gaID = 'G-JCW6JZHB9D'; // Remplace par ton ID GA4
+
+      function hasConsent() {
+        return localStorage.getItem('ga-consent') === 'true';
+      }
+
+      function acceptAnalytics() {
+        localStorage.setItem('ga-consent', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+        loadAnalytics();
+      }
+
+      function declineAnalytics() {
+        localStorage.setItem('ga-consent', 'false');
+        document.getElementById('cookie-banner').style.display = 'none';
+      }
+
+      function loadAnalytics() {
+        // Charge GA seulement après acceptation
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', gaID, { anonymize_ip: true });
+
+        const script = document.createElement('script');
+        script.setAttribute('async', '');
+        script.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${gaID}`);
+        document.head.appendChild(script);
+      }
+
+      // Au chargement de la page
+      window.addEventListener('DOMContentLoaded', () => {
+        const consent = localStorage.getItem('ga-consent');
+        if (consent === 'true') {
+          loadAnalytics();
+          document.getElementById('cookie-banner').style.display = 'none';
+        } else if (consent === 'false') {
+          document.getElementById('cookie-banner').style.display = 'none';
+        }
+        // Sinon, on affiche la bannière (défaut)
+      });
+    </script>
+
   </head>
   <body data-lang="fr">
+
+    <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #f2f2f2; padding: 1em; text-align: center; z-index: 1000;">
+      Ce site utilise Google Analytics (cookies anonymes) pour améliorer le contenu. <br />
+      <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accepter</button>
+      <button onclick="declineAnalytics()" style="margin: 0.5em;">Refuser</button>
+    </div>
+
     <header class="container">
       <nav>
         <div class="nav-left">
@@ -336,6 +387,24 @@
       </section>
     </main>
 
+    <footer class="container">
+      <hr />
+      <nav>
+        <small>
+          © 2025. S. Nichele, All rights reserved.
+        </small>
+        <small>
+          <a href="/mentions.html" target="_blank">Mentions légales et politique de confidentialité</a>
+        </small>
+      </nav>
+    </footer>
+    <!-- Script Google Analytics bloqué tant que pas d'accord -->
+<!--    <script type="text/plain" data-type="application/javascript" data-name="google-analytics">-->
+<!--      window.dataLayer = window.dataLayer || [];-->
+<!--      function gtag(){dataLayer.push(arguments);}-->
+<!--      gtag('js', new Date());-->
+<!--      gtag('config', 'G-JCW6JZHB9D'); // Remplace par ton ID GA4-->
+<!--    </script>-->
     <script>
       // Lang switcher
       function setLang(lang) {
