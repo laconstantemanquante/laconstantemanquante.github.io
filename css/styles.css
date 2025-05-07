@@ -1,0 +1,191 @@
+/* ---------------------------------------
+   Variables globales
+-----------------------------------------*/
+:root {
+    --pico-font-family: 'EB Garamond', serif;
+    --font-scale: 1;
+    --accent-color: #9e7929; /* couleur pour mode clair */
+}
+
+[data-theme="dark"] {
+    --accent-color: #e1ca88; /* couleur pour mode sombre */
+}
+
+/* ---------------------------------------
+   Base HTML
+-----------------------------------------*/
+html {
+    font-family: var(--pico-font-family);
+    font-size: calc(100% * var(--font-scale));
+    scroll-behavior: smooth;
+}
+
+/* ---------------------------------------
+   Conteneur principal centré
+-----------------------------------------*/
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* ---------------------------------------
+   Header (barre de navigation)
+-----------------------------------------*/
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--pico-background-color);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--pico-muted-border-color, #ccc);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Responsive navigation */
+@media (max-width: 600px) {
+    .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-right {
+        justify-content: flex-end;
+    }
+}
+
+/* ---------------------------------------
+   Icônes et boutons divers
+-----------------------------------------*/
+.flag {
+    width: 24px;
+    height: auto;
+    cursor: pointer;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+/* Boutons de réglage de la taille de police */
+.font-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.font-buttons button {
+    padding: 0.3rem 0.6rem;
+    line-height: 1;
+}
+
+/* ---------------------------------------
+   Gestion des langues
+-----------------------------------------*/
+[data-lang]:not([data-lang="fr"]) .fr,
+[data-lang]:not([data-lang="en"]) .en {
+    display: none;
+}
+
+/* ---------------------------------------
+   Couleur personnalisée des titres
+-----------------------------------------*/
+nav strong,
+h1, h2, h3, h4, h5, h6 {
+    color: var(--accent-color);
+}
+
+h2 {
+    text-align: center;
+}
+
+/* ---------------------------------------
+   Sections et marges
+-----------------------------------------*/
+section {
+    scroll-margin-top: 6rem; /* Décalage pour scroll auto avec header sticky */
+}
+
+/* ---------------------------------------
+   Paragraphes illustrés (image + texte)
+-----------------------------------------*/
+.illustrated-paragraph {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-block: 2rem;
+    flex-wrap: wrap;
+}
+
+.illustrated-paragraph.start {
+    flex-direction: row;
+}
+
+.illustrated-paragraph.end {
+    flex-direction: row-reverse;
+}
+
+.illustrated-paragraph figure {
+    flex-shrink: 0;
+    max-width: 360px;
+}
+
+.illustrated-paragraph img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.illustrated-paragraph .text {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ---------------------------------------
+   Responsive pour paragraphes illustrés
+   (petits écrans : image centrée, texte aligné à gauche)
+-----------------------------------------*/
+@media (max-width: 800px) {
+    .illustrated-paragraph {
+        flex-direction: column;
+        align-items: center;
+        text-align: initial; /* <-- texte RESTE aligné à gauche */
+    }
+
+    .illustrated-paragraph figure,
+    .illustrated-paragraph .text {
+        width: 100%;
+        max-width: 500px; /* <-- limite la largeur de l'image ET du texte */
+    }
+
+    .illustrated-paragraph figure {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .illustrated-paragraph .text {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+

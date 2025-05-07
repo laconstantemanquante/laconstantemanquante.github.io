@@ -4,164 +4,25 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>La constante manquante</title>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.amber.min.css"/>
-    <style>
-      :root {
-        --pico-font-family: 'EB Garamond', serif;
-        --font-scale: 1;
-        --accent-color: #9e7929; /* couleur pour mode clair */
-      }
-
-      [data-theme="dark"] {
-        --accent-color: #e1ca88; /* couleur pour mode sombre */
-      }
-
-      html {
-        font-family: var(--pico-font-family);
-        font-size: calc(100% * var(--font-scale));
-      }
-
-      section {
-        scroll-margin-top: 6rem;
-      }
-
-      /* ----- Mise en forme de la navigation ----- */
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: var(--pico-background-color);
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--pico-muted-border-color, #ccc);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      }
-
-
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .nav-left,
-      .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      @media (max-width: 600px) {
-        .nav-left {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .nav-right {
-          justify-content: flex-end;
-        }
-      }
-
-      /* ----- Icônes (drapeaux + thème) ----- */
-
-      .flag {
-        width: 24px;
-        height: auto;
-        cursor: pointer;
-      }
-
-      .theme-toggle {
-        background: none;
-        border: none;
-        font-size: 1.3rem;
-        cursor: pointer;
-      }
-
-      /* ----- Boutons de taille de police ----- */
-
-      .font-buttons {
-        display: flex;
-        gap: 0.5rem;
-      }
-
-      .font-buttons button {
-        font-size: 1.2rem;
-        padding: 0.3rem 0.6rem;
-        line-height: 1;
-      }
-
-      /* ----- Affichage conditionnel des langues ----- */
-
-      [data-lang]:not([data-lang="fr"]) .fr,
-      [data-lang]:not([data-lang="en"]) .en {
-        display: none;
-      }
-
-      /* ----- Couleur personnalisée des titres ----- */
-
-      nav strong,
-      h1, h2, h3, h4, h5, h6 {
-        color: var(--accent-color);
-      }
-
-      /* ----- Images et paragraphes  ---- */
-      .illustrated-paragraph {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        margin-block: 2rem;
-        flex-wrap: wrap;
-      }
-
-      .illustrated-paragraph.start {
-        flex-direction: row;
-      }
-
-      .illustrated-paragraph.end {
-        flex-direction: row-reverse;
-      }
-
-      .illustrated-paragraph figure {
-        flex-shrink: 0;
-        max-width: 360px;
-      }
-
-      .illustrated-paragraph img {
-        width: 100%;
-        height: auto;
-        border-radius: 0.5rem;
-      }
-
-      .illustrated-paragraph .text {
-        flex: 1;
-        min-width: 200px;
-      }
-
-      @media (max-width: 600px) {
-        .illustrated-paragraph {
-          flex-direction: column !important;
-          align-items: center;
-        }
-
-        .illustrated-paragraph figure,
-        .illustrated-paragraph .text {
-          width: 100%;
-          max-width: 100%;
-        }
-      }
-
-
-    </style>
+    <link rel="stylesheet" href="./css/fonts.css"/>
+    <link rel="stylesheet" href="./css/pico.amber.min.css"/>
+    <link rel="stylesheet" href="./css/styles.css"/>
   </head>
   <body data-lang="fr">
     <header class="container">
       <nav>
+        <div class="nav-left">
+          <strong>La constante manquante</strong>
+          <a href="#book" class="fr">Le livre</a>
+          <a href="#book" class="en">The book</a>
+          <a href="#characters" class="fr">Les personnages</a>
+          <a href="#characters" class="en">Characters</a>
+          <a href="#links" class="fr">Liens</a>
+          <a href="#links" class="en">Links</a>
+        </div>
         <div class="nav-right">
-          <img src="https://flagcdn.com/fr.svg" alt="FR" class="flag" onclick="setLang('fr')"/>
-          <img src="https://flagcdn.com/us.svg" alt="EN" class="flag" onclick="setLang('en')"/>
+          <!--          <img src="https://flagcdn.com/fr.svg" alt="FR" class="flag" onclick="setLang('fr')"/>-->
+          <!--          <img src="https://flagcdn.com/us.svg" alt="EN" class="flag" onclick="setLang('en')"/>-->
           <div class="font-buttons">
             <button onclick="adjustFont(-0.1)" title="Réduire la taille de police">A−</button>
             <button onclick="adjustFont(+0.1)" title="Augmenter la taille de police">A+</button>
@@ -173,10 +34,306 @@
 
     <main class="container">
       <section id="book">
-        <h2 class="fr">Bientôt !</h2>
-        <h2 class="en">Soon !</h2>
+        <h2 class="fr">Le livre</h2>
+        <h2 class="en">The book</h2>
+
+        <div class="illustrated-paragraph end">
+          <figure>
+            <picture>
+              <source srcset="simple_cover_480.jpg" media="(max-width: 600px)">
+              <source srcset="simple_cover_768.jpg" media="(max-width: 1024px)">
+              <img src="simple_cover.jpg" alt="Extrait visuel du livre">
+            </picture>
+          </figure>
+          <div class="text">
+            <blockquote class="fr">
+              <p>
+                <strong>Alicia</strong> est une jeune fille de 18 ans <em>presque</em> comme les autres, qui fait
+                l’école à la maison.
+                Cette année, elle prépare le BAC en candidat individuel – comme environ 3&nbsp;% des candidats.
+              </p>
+
+              <p>
+                Elle vit aussi avec le syndrome de Treacher-Collins, qui marque son visage et façonne son rapport au
+                monde et aux autres –
+                là, on tombe à 0,002&nbsp;%.
+              </p>
+
+              <p>
+                Une condition qui la tient à l’écart d’une société qui, à ses yeux, semble ne pas vouloir d’elle.
+                Heureusement, Anne, sa mère, veille, conjuguant carrière et soutien avec patience et amour.
+              </p>
+
+              <p>
+                Mais cette année, un obstacle de taille se dresse sur son chemin&nbsp;: les mathématiques.
+                Le programme de terminale est ardu. Trop, pour qu’elle s’en sorte seule.
+                Il lui faut de l’aide.
+              </p>
+
+              <p>
+                C’est ainsi qu’elle rencontre <strong>Fabien</strong>, jeune normalien brillant, une thèse en poche
+                et une passion contagieuse pour le «&nbsp;langage secret de la nature&nbsp;».
+                Un <em>simple</em> professeur particulier, en apparence.
+              </p>
+
+              <p>
+                Mais au fil des séances, une autre équation, hors programme officiel, commence à se dessiner.
+                De celles qu’on ne résout pas avec des théorèmes.
+              </p>
+
+              <p>
+                Une équation qui pourrait bien bouleverser tout ce qu’ils croyaient savoir d’eux-mêmes.
+              </p>
+
+            </blockquote>
+
+          </div>
+        </div>
+
+        <div class="fr">
+          <article>
+            <h4><em>Un mot de l'auteur</em></h4>
+
+            <p>L’écriture — mais je ne vais sûrement rien vous apprendre — <strong>a</strong> quelque chose de magique.
+            </p>
+
+            <p>
+              Je l’avais mise de côté depuis le lycée, mais l’envie ne m’avait jamais vraiment quitté.
+              Cette envie de retrouver les mots, de partager quelque chose de fort, de vrai.
+            </p>
+
+            <p>
+              Pas d’explosions, pas de rebondissements hollywoodiens ici.
+              Juste la vie, avec ses sentiments, ses épreuves, ses rencontres. Et ce livre…
+            </p>
+
+            <p>
+              Alicia est entrée dans ma vie sans prévenir, presque par hasard, alors que je cherchais une belle histoire
+              à raconter.
+              Elle m’a guidé doucement, page après page, dans sa quête personnelle, sans que je devine vraiment où elle
+              allait nous mener.
+            </p>
+
+            <p>
+              Inspirée par d’autres vies, par d’autres voix, Alicia m’a montré un chemin que je n’aurais jamais
+              découvert seul.
+              Avec ce premier roman, j’ai voulu partager un peu de son histoire. Pas tout, bien sûr…
+            </p>
+
+            <p>
+              J’espère qu’elle vous touchera comme elle m’a profondément touché.
+            </p>
+
+          </article>
+
+        </div>
+
+        <p class="en">Here's a glimpse of the novel “La constante manquante”. A touching, vibrant story driven by
+          unforgettable characters.</p>
       </section>
 
+      <section id="characters">
+        <h2 class="fr">Les personnages</h2>
+        <h2 class="en">Characters</h2>
+
+        <div class="illustrated-paragraph start">
+          <figure>
+            <picture>
+              <source srcset="alicia_bed_capteur_480.jpg" media="(max-width: 600px)">
+              <source srcset="alicia_bed_capteur_768.jpg" media="(max-width: 1024px)">
+              <img src="alicia_bed_capteur.jpg" alt="Alicia, allongée avec un livre sur son lit">
+            </picture>
+          </figure>
+          <div class="text fr">
+            <h3>❧ Alicia</h3>
+            <p><strong>Salut&nbsp;!</strong></p>
+
+            <p>Bon, si vous êtes là, c’est qu’on s’est croisé d’une façon ou d’une autre, ou que vous avez entendu
+              parler
+              de <em>La constante manquante</em>, un roman qui... parle d’acceptation de soi.</p>
+
+            <p>«&nbsp;Entre autres&nbsp;», qu’on me souffle. Oui, entre autres...</p>
+
+            <p>«&nbsp;Précise de qui&nbsp;!&nbsp;»</p>
+
+            <p>Pfff... J’y viens.</p>
+
+            <p>De la mienne, en l’occurrence.</p>
+
+            <p>Ça ne s’est pas fait comme ça, évidemment. Ni du jour au lendemain. En fait, je crois que ça s’est étalé
+              sur toute l’année de terminale. Ha oui, pardon, je suis en terminale, et j’attaque les épreuves du BAC
+              bientôt. Ça devrait aller, j’ai assez bossé pour ça, et puis surtout... <em> mais chut, je ne vais pas
+                trop en dire non
+                plus</em>&nbsp;!</p>
+
+            <p>Ha, on me dit de parler de ma particularité. C’est vrai, ça peut avoir son importance.</p>
+
+            <p>On va rester factuel et minimaliste, j’espère que vous ne m’en voudrez pas trop...</p>
+
+            <p>Je suis née avec le syndrome de Treacher-Collins. Vous en avez peut-être déjà entendu parler, sans
+              forcément avoir retenu le nom. Un garçon qui va à l'école avec un casque d’astronaute, ça vous dit quelque
+              chose&nbsp;?</p>
+
+            <p>C’est une maladie génétique rare qui touche principalement le visage. Il y a plusieurs formes&nbsp;: des
+              plus légères à des formes très lourdes. Moi, je suis quelque part au milieu. J’ai des pommettes plates,
+              les
+              yeux un peu en biais et tombants, pas d’oreilles – enfin si&nbsp;: des trucs qui ressemblent vaguement à
+              des
+              oreilles, mais sans conduit auditif. Vachement intéressant comme concept. Utile pour caler les lunettes,
+              mais sans plus.</p>
+
+            <p>Du coup, j’ai des appareils auditifs. Relativement discrets, fixation magnétique sur une base implantée
+              dans l’os (quelqu’un m’a dit un jour&nbsp;: «&nbsp;C’est transhumaniste ton truc&nbsp;!&nbsp;»). Deux
+              petits
+              capteurs qui tiennent dans la main, mis et enlevés en quelques secondes&nbsp;! Il suffit de les retirer
+              pour ne
+              plus rien entendre. Ha, le truc cool, c’est que je peux diffuser du son dedans directement en
+              Bluetooth.</p>
+
+            <p>Après, j’ai aussi une mâchoire pas terrible et une bouche un peu asymétrique, sans parler de
+              l’orthodontie.
+              Je mange <em>tellement</em> lentement et dois faire attention tout le temps…</p>
+
+            <p>J’ai subi un paquet d’opérations depuis que je suis née, allant de «&nbsp;vitales&nbsp;» à «&nbsp;fortement
+              conseillées&nbsp;». Et
+              elles m’ont largement calmée. Les «&nbsp;moins importantes&nbsp;», principalement cosmétiques, je les ai
+              refusées. Franchement, je n’avais pas le courage…</p>
+
+            <p>Jusqu’à l’entrée au collège, disons que j’encaissais. Mais ça a doucement dégénéré. La 4<sup>e</sup>
+              a été la pire. Ajoutez à ça une intervention importante… ça a été la goutte d’eau.</p>
+
+            <p>Maman m’a sortie de l’école. Il était question de me faire sauter une classe – comme quoi on peut
+              avoir
+              une boîte crânienne montée de travers et un cerveau correct – c'était le moment. J’ai finalement réussi à
+              m’adapter à ma
+              nouvelle vie&nbsp;: à la maison, tout le temps. Je n’avais pas forcément beaucoup d’amis avant, mais là,
+              le
+              compteur est tombé à zéro. Hey, je suis encore là, ça veut dire que j’ai survécu sans, non&nbsp;?</p>
+
+            <p>Mais assez parlé de tout ça.</p>
+
+            <p>Le roman&nbsp;? Ha oui…</p>
+
+            <p>Il commence au début de l’année de terminale. L’année de première avait déjà été compliquée.
+              Quand j'ai découvert le programme de l'année, j'ai tout de suite capté que ça ne s'annonçait <em>pas bien
+                du tout</em>…</p>
+
+            <p>Alors je n’ai jamais dit que j’étais un génie, ok&nbsp;? On a beau être débrouillard, quand certains
+              trucs ne passent
+              pas, ils ne passent pas, c'est tout&nbsp;!</p>
+
+            <p>J’ai horreur de ça d’ailleurs, de ne pas y arriver. Enfin vous verrez si vous lisez la suite.</p>
+
+            <p>C’est juste en bas de la page. Je connais quelqu’un qui a mis tout son cœur là-dedans. En le soutenant,
+              vous nous soutenez tous. Et vous ferez plus d’un heureux… 😉</p>
+            <p class="en">This paragraph is displayed with an illustration aligned to the left. The text adapts to the
+              image, even on mobile.</p>
+          </div>
+        </div>
+        <div class="illustrated-paragraph end">
+          <figure>
+            <picture>
+              <source srcset="fabien_tableau.jpg" media="(max-width: 600px)">
+              <source srcset="fabien_tableau.jpg" media="(max-width: 1024px)">
+              <img src="fabien_tableau.jpg" alt="Fabien, face au tableau.">
+            </picture>
+          </figure>
+          <div class="text fr">
+            <h3>❧ Fabien</h3>
+            <section class="interview-fabien">
+              <p><strong>Ce qui est un peu ironique, c’est que je n’étais pas spécialement doué en maths.</strong></p>
+
+              <p>
+                J’ai traversé le primaire, le collège et le lycée avec une compréhension correcte et très scolaire,
+                et des résultats dans la même veine.
+              </p>
+
+              <p>
+                Et puis une rencontre a tout changé. Un professeur incroyable.
+                Mon « professeur Keating » personnel (regardez le <em>Le Cercle des poètes disparus</em>, si ça ne vous
+                dit rien).
+              </p>
+
+              <p>
+                Cet homme m’aura définitivement marqué et inspiré, ouvert un chemin intérieur, <em>proposé quelque chose
+                de différent</em>.<br>
+                L’idée que la relation entre le savoir, les connaissances et la maîtrise est profondément liée
+                à ce que vous êtes, au fond de vous.
+              </p>
+
+              <p>
+                Après avoir obtenu mon doctorat, j’ai décidé de suivre son exemple.<br>
+                J’ai choisi d’enseigner, différemment, principalement en cours particulier.
+              </p>
+
+              <p>
+                Je n’ai pas été déçu. Je reçois autant que je donne.<br>
+                La multiplicité des intelligences et des individus est une richesse que je savoure à chaque rencontre.
+              </p>
+
+              <p>
+                Saisir les processus de pensée, sans chercher à analyser, juste de façon intuitive, presque systémique,
+                c’est aussi passionnant que de plancher sur un théorème ou une démonstration.
+              </p>
+
+              <p><strong>Et puis j’ai rencontré Alicia.</strong></p>
+
+              <p>
+                Comme beaucoup de ceux qui traversent des difficultés profondes, elle est complexe, entière, intense.
+              </p>
+
+              <p>
+                Rebelle, cynique et résignée, aussi.<br>
+                Et elle ne croit pas en elle, évidemment.<br>
+                Ne réalise pas la lumière qu’elle porte.
+              </p>
+
+              <p>
+                Il nous aura fallu du temps pour nous rejoindre, pour comprendre et sublimer ce que nous avions,
+                l’un et l’autre, à nous apporter mutuellement.
+              </p>
+
+              <p><em>Quelques mois…</em></p>
+
+              <p><em>Le temps qu’il fallait.</em></p>
+
+              <p>
+                Je ne vais pas tout dévoiler ici.<br>
+                Mais si vous êtes arrivé jusqu’à cette page, c’est peut-être que vous vous demandez
+                ce que l’on peut trouver derrière un visage qu’on n’attendait pas.
+              </p>
+
+              <p>
+                Lisez <strong>La constante manquante</strong> – mais s’il vous plaît, <em>sans rien attendre.</em>
+              </p>
+
+              <p>
+                Laissez-vous doucement porter.<br>
+                Prenez le temps d’écouter Alicia comme je l’ai fait. De méditer, à chaque étape.
+              </p>
+
+              <p>
+                J’ai trouvé énormément de moi en elle.<br>
+                Peut-être que vous vous y retrouverez aussi.
+              </p>
+
+            </section>
+
+
+          </div>
+        </div>
+
+
+      </section>
+
+      <section id="links">
+        <h2 class="fr">Liens</h2>
+        <h3 class="fr">Acheter le livre</h3>
+
+        <p><a target="_blank" href="https://livres.bookelis.com/romans/69118-La-constante-manquante.html">
+          Format papier (296 pages)
+        </a></p>
+      </section>
     </main>
 
     <script>
