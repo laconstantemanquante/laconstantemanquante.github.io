@@ -189,3 +189,55 @@ section {
     }
 }
 
+/* Cacher le menu par défaut en mobile */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+@media (max-width: 600px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-menu.open {
+        display: block;
+    }
+
+    .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+    }
+}
+
+.hamburger {
+    color: var(--accent-color);
+}
+
+[data-theme="dark"] .hamburger {
+    color: var(--accent-color, #e1ca88);
+}
+
+[data-theme="light"] .hamburger {
+    color: var(--accent-color, #9e7929);
+}
+
+aside a {
+    filter: sepia(0.8);
+    transition: filter 0.3s ease;
+}
+
+aside a:hover{
+    filter: none;
+}

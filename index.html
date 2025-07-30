@@ -54,6 +54,10 @@
         }
         // Sinon, on affiche la bannière (défaut)
       });
+
+      function toggleMobileMenu() {
+        document.getElementById('mobileMenu').classList.toggle('open');
+      }
     </script>
 
   </head>
@@ -68,14 +72,17 @@
 
     <header class="container">
       <nav>
-        <div class="nav-left">
-          <strong>La constante manquante</strong>
-          <a href="#book" class="fr">Le livre</a>
-          <a href="#book" class="en">The book</a>
-          <a href="#characters" class="fr">Les personnages</a>
-          <a href="#characters" class="en">Characters</a>
-          <a href="#links" class="fr">Liens</a>
-          <a href="#links" class="en">Links</a>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+        <div class="nav-menu" id="mobileMenu">
+          <div class="nav-left">
+            <strong>La constante manquante</strong>
+            <a href="#book" onclick="toggleMobileMenu()" class="fr">Le livre</a>
+            <a href="#book" onclick="toggleMobileMenu()" class="en">The book</a>
+            <a href="#characters" onclick="toggleMobileMenu()" class="fr">Les personnages</a>
+            <a href="#characters" onclick="toggleMobileMenu()" class="en">Characters</a>
+            <a href="#links" onclick="toggleMobileMenu()" class="fr">Liens</a>
+            <a href="#links" onclick="toggleMobileMenu()" class="en">Links</a>
+          </div>
         </div>
         <div class="nav-right">
           <img src="https://flagcdn.com/fr.svg" alt="FR" class="flag" onclick="setLang('fr')"/>
@@ -87,6 +94,164 @@
           <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">🌞</button>
         </div>
       </nav>
+      <aside style="text-align: center">
+        <a href="https://www.facebook.com/LaConstanteManquante/" target="_blank" rel="noopener noreferrer"
+           style="text-decoration: none; display: inline-flex; align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877f2"
+               aria-hidden="true" style="margin-right: 4px;">
+            <path
+              d="M22.675 0h-21.35C.596 0 0 .593 0 1.326v21.348C0 23.408.596 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116C23.405 24 24 23.408 24 22.674V1.326C24 .593 23.405 0 22.675 0z"/>
+          </svg>
+          <span style="color: #1877f2;">Facebook</span>
+        </a>&nbsp;
+        <a href="https://www.instagram.com/laconstantemanquante/" target="_blank" rel="noopener noreferrer"
+           style="text-decoration: none; display: inline-flex; align-items: center;">
+
+          <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 264.5833 264.5833"
+            version="1.1"
+            id="svg15"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:svg="http://www.w3.org/2000/svg">
+            <defs
+              id="defs11">
+              <radialGradient
+                id="f"
+                cx="158.429"
+                cy="578.088"
+                r="52.3515"
+                xlink:href="#a"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="matrix(0 -4.03418 4.28018 0 -2332.2273 942.2356)"
+                fx="158.429"
+                fy="578.088"/>
+              <radialGradient
+                xlink:href="#b"
+                id="g"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="matrix(.67441 -1.16203 1.51283 .87801 -814.3657 -47.8354)"
+                cx="172.6149"
+                cy="600.6924"
+                fx="172.6149"
+                fy="600.6924"
+                r="65"/>
+              <radialGradient
+                xlink:href="#c"
+                id="h"
+                cx="144.012"
+                cy="51.3367"
+                fx="144.012"
+                fy="51.3367"
+                r="67.081"
+                gradientTransform="matrix(-2.3989 .67549 -.23008 -.81732 464.9957 -26.4035)"
+                gradientUnits="userSpaceOnUse"/>
+              <radialGradient
+                xlink:href="#d"
+                id="e"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="matrix(-3.10797 .87652 -.6315 -2.23914 1345.6503 1374.1983)"
+                cx="199.7884"
+                cy="628.4379"
+                fx="199.7884"
+                fy="628.4379"
+                r="52.3515"/>
+              <linearGradient
+                id="d">
+                <stop
+                  offset="0"
+                  stop-color="#ff005f"
+                  id="stop1"/>
+                <stop
+                  offset="1"
+                  stop-color="#fc01d8"
+                  id="stop2"/>
+              </linearGradient>
+              <linearGradient
+                id="c">
+                <stop
+                  offset="0"
+                  stop-color="#780cff"
+                  id="stop3"/>
+                <stop
+                  stop-color="#820bff"
+                  offset="1"
+                  stop-opacity="0"
+                  id="stop4"/>
+              </linearGradient>
+              <linearGradient
+                id="b">
+                <stop
+                  offset="0"
+                  stop-color="#fc0"
+                  id="stop5"/>
+                <stop
+                  offset="1"
+                  stop-color="#fc0"
+                  stop-opacity="0"
+                  id="stop6"/>
+              </linearGradient>
+              <linearGradient
+                id="a">
+                <stop
+                  offset="0"
+                  stop-color="#fc0"
+                  id="stop7"/>
+                <stop
+                  offset=".1242"
+                  stop-color="#fc0"
+                  id="stop8"/>
+                <stop
+                  offset=".5672"
+                  stop-color="#fe4a05"
+                  id="stop9"/>
+                <stop
+                  offset=".6942"
+                  stop-color="#ff0f3f"
+                  id="stop10"/>
+                <stop
+                  offset="1"
+                  stop-color="#fe0657"
+                  stop-opacity="0"
+                  id="stop11"/>
+              </linearGradient>
+            </defs>
+            <g
+              id="g15">
+              <path
+                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
+                fill="url(#e)"
+                transform="translate(-71.8155 -18.1429)"
+                id="path11"/>
+              <path
+                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
+                fill="url(#f)"
+                transform="translate(-71.8155 -18.1429)"
+                id="path12"/>
+              <path
+                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
+                fill="url(#g)"
+                transform="translate(-71.8155 -18.1429)"
+                id="path13"/>
+              <path
+                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
+                fill="url(#h)"
+                transform="translate(-71.8155 -18.1429)"
+                id="path14"/>
+              <path
+                d="M132.3452 33.973c-26.7167 0-30.0696.1167-40.5629.5939-10.4727.4792-17.6212 2.136-23.8762 4.567-6.4701 2.5107-11.9586 5.8693-17.4265 11.3352-5.472 5.464-8.8332 10.9483-11.354 17.4116-2.4389 6.2524-4.099 13.3976-4.5703 23.8585-.4693 10.4854-.5923 13.8379-.5923 40.5348 0 26.697.1189 30.0371.5943 40.5225.4817 10.465 2.1397 17.6082 4.5703 23.8585 2.5147 6.4654 5.8758 11.9497 11.3458 17.4136 5.466 5.468 10.9544 8.8349 17.4204 11.3456 6.259 2.4309 13.4097 4.0877 23.8803 4.567 10.4933.477 13.8441.5938 40.5588.5938 26.7188 0 30.0615-.1167 40.5547-.5939 10.4728-.4792 17.6295-2.136 23.8885-4.567 6.4681-2.5106 11.9484-5.8775 17.4143-11.3455 5.472-5.4639 8.8332-10.9482 11.354-17.4115 2.4183-6.2524 4.0784-13.3976 4.5703-23.8585.4713-10.4854.5943-13.8277.5943-40.5246 0-26.697-.123-30.0473-.5943-40.5328-.4919-10.465-2.152-17.6081-4.5703-23.8584-2.5208-6.4654-5.882-11.9498-11.354-17.4137-5.4721-5.468-10.9442-8.8266-17.4204-11.3353-6.2714-2.4309-13.424-4.0877-23.8967-4.5669-10.4933-.4772-13.8339-.5939-40.5588-.5939zm-8.825 17.7147c2.6193-.0041 5.5418 0 8.825 0 26.2659 0 29.379.0942 39.7513.5652 9.5915.4383 14.7971 2.0397 18.2648 3.3852 4.5908 1.7817 7.8638 3.9116 11.3048 7.3521 3.4431 3.4406 5.5745 6.7173 7.3617 11.3046 1.3465 3.461 2.9512 8.6628 3.3877 18.2472.4714 10.3625.5739 13.4754.5739 39.7095 0 26.234-.1025 29.347-.5739 39.7095-.4386 9.5843-2.0412 14.7861-3.3877 18.2471-1.783 4.5874-3.9186 7.8539-7.3617 11.2923-3.443 3.4406-6.712 5.5704-11.3048 7.3521-3.4636 1.3517-8.6733 2.949-18.2648 3.3873-10.3702.471-13.4854.5734-39.7513.5734-26.2679 0-29.381-.1024-39.7513-.5734-9.5914-.4423-14.797-2.0438-18.2668-3.3893-4.5908-1.7817-7.87-3.9116-11.313-7.3521-3.4431-3.4405-5.5745-6.709-7.3617-11.2985-1.3465-3.461-2.9512-8.6628-3.3877-18.2471-.4714-10.3626-.5657-13.4754-.5657-39.7259 0-26.2504.0943-29.347.5657-39.7095.4386-9.5844 2.0412-14.7861 3.3877-18.2512 1.783-4.5874 3.9186-7.8641 7.3617-11.3046 3.443-3.4406 6.7222-5.5704 11.313-7.3562 3.4677-1.3517 8.6754-2.949 18.2668-3.3894 9.075-.4096 12.5919-.5324 30.9264-.553zm61.3363 16.322c-6.5173 0-11.805 5.2776-11.805 11.792 0 6.5125 5.2877 11.7962 11.805 11.7962 6.5172 0 11.8049-5.2837 11.8049-11.7962 0-6.5124-5.2877-11.796-11.805-11.796zm-52.5113 13.7826c-27.8993 0-50.5191 22.6031-50.5191 50.4817 0 27.8786 22.6198 50.4714 50.5191 50.4714s50.511-22.5928 50.511-50.4714c0-27.8786-22.6137-50.4817-50.513-50.4817zm0 17.7147c18.109 0 32.7914 14.6694 32.7914 32.767 0 18.0956-14.6824 32.767-32.7914 32.767-18.111 0-32.7913-14.6714-32.7913-32.767 0-18.0976 14.6803-32.767 32.7913-32.767z"
+                fill="#fff"
+                id="path15"/>
+            </g>
+          </svg>
+          <span style="color: #ff0073ff;">Instagram</span>
+        </a>
+
+      </aside>
+
     </header>
 
     <main class="container">
@@ -144,17 +309,25 @@
 
             </blockquote>
             <blockquote class="en">
-              <p><strong>Alicia</strong> is an 18-year-old girl who’s <em>almost</em> like any other. She’s homeschooled and studying for her high school diploma as an independent candidate — like about 3% of students her age.</p>
+              <p><strong>Alicia</strong> is an 18-year-old girl who’s <em>almost</em> like any other. She’s homeschooled
+                and studying for her high school diploma as an independent candidate — like about 3% of students her
+                age.</p>
 
-              <p>She also lives with Treacher-Collins syndrome, a rare condition that shapes her face and colors the way she relates to the world and others. That number drops to about <em>0.002%</em>.</p>
+              <p>She also lives with Treacher-Collins syndrome, a rare condition that shapes her face and colors the way
+                she relates to the world and others. That number drops to about <em>0.002%</em>.</p>
 
-              <p>A condition that tends to push her to the sidelines in a society that doesn’t seem to have a place for her. Luckily, her mom Anne is there — juggling work, support, patience, and love.</p>
+              <p>A condition that tends to push her to the sidelines in a society that doesn’t seem to have a place for
+                her. Luckily, her mom Anne is there — juggling work, support, patience, and love.</p>
 
-              <p>But this year, one major hurdle stands in her way: math. Senior year is no joke. Too much for her to manage alone. She needs help.</p>
+              <p>But this year, one major hurdle stands in her way: math. Senior year is no joke. Too much for her to
+                manage alone. She needs help.</p>
 
-              <p>That’s how she meets <strong>Fabien</strong>, a bright young academic with a PhD and a contagious passion for what he calls the <em>“secret language of nature”</em>. Just a <em>tutor</em>, at first glance.</p>
+              <p>That’s how she meets <strong>Fabien</strong>, a bright young academic with a PhD and a contagious
+                passion for what he calls the <em>“secret language of nature”</em>. Just a <em>tutor</em>, at first
+                glance.</p>
 
-              <p>But as their sessions go on, a different kind of equation begins to form — one no theorem can solve.</p>
+              <p>But as their sessions go on, a different kind of equation begins to form — one no theorem can
+                solve.</p>
 
               <p>An equation that might just change everything they thought they knew about themselves.</p>
             </blockquote>
@@ -205,13 +378,18 @@
 
             <p>Writing — though I’m probably not telling you anything new — <em>has</em> something magical about it.</p>
 
-            <p>I’d put it aside after high school, but the desire never really left me. That urge to return to words, to play with them, and to share something meaningful — a piece of myself.</p>
+            <p>I’d put it aside after high school, but the desire never really left me. That urge to return to words, to
+              play with them, and to share something meaningful — a piece of myself.</p>
 
-            <p>No explosions here. No Hollywood-style twists. Just life, with its emotions, struggles, and <em>encounters</em>…</p>
+            <p>No explosions here. No Hollywood-style twists. Just life, with its emotions, struggles, and <em>encounters</em>…
+            </p>
 
-            <p>Alicia came into my life without warning, almost by accident, as I was searching for a story worth telling. She gently led me, page by page, through her own journey — and I had no idea where it would take us.</p>
+            <p>Alicia came into my life without warning, almost by accident, as I was searching for a story worth
+              telling. She gently led me, page by page, through her own journey — and I had no idea where it would take
+              us.</p>
 
-            <p>Inspired by other lives and other voices, Alicia showed me a path I’d never have found on my own. With this first novel, I just wanted to share <em>a little</em> of her story.</p>
+            <p>Inspired by other lives and other voices, Alicia showed me a path I’d never have found on my own. With
+              this first novel, I just wanted to share <em>a little</em> of her story.</p>
 
             <p>I hope she’ll move you the way she moved me — deeply.</p>
           </article>
@@ -326,7 +504,8 @@
             <h3>❧ Alicia</h3>
             <p><strong>Hey there!</strong></p>
 
-            <p>If you’re here, we must’ve crossed paths somehow — or maybe you’ve heard of <em>La constante manquante</em>, a novel about… self-acceptance.</p>
+            <p>If you’re here, we must’ve crossed paths somehow — or maybe you’ve heard of <em>La constante
+              manquante</em>, a novel about… self-acceptance.</p>
 
             <p><em>“Among other things,”</em> someone whispers. Yeah, among other things…</p>
 
@@ -336,39 +515,58 @@
 
             <p>About me, actually.</p>
 
-            <p>It didn’t happen overnight, of course. Took the whole final year of high school, really. Oh right — I’m in senior year, and I’ll be taking my exams soon. I should be fine, I’ve worked hard… and more importantly — <em>but shhh, can’t spoil everything</em>!</p>
+            <p>It didn’t happen overnight, of course. Took the whole final year of high school, really. Oh right — I’m
+              in senior year, and I’ll be taking my exams soon. I should be fine, I’ve worked hard… and more importantly
+              — <em>but shhh, can’t spoil everything</em>!</p>
 
             <p>I’ve been told to talk about my “uniqueness.” Okay, fair. Might be relevant.</p>
 
             <p>I’ll keep it brief and to the point — hope you don’t mind.</p>
 
-            <p>I was born with Treacher-Collins syndrome. You may have heard of it, even if the name didn’t stick. A kid who goes to school with an astronaut helmet ring a bell? Don’t go Googling just yet…</p>
+            <p>I was born with Treacher-Collins syndrome. You may have heard of it, even if the name didn’t stick. A kid
+              who goes to school with an astronaut helmet ring a bell? Don’t go Googling just yet…</p>
 
-            <p>It’s a rare genetic condition that mainly affects the face. There are different forms — from mild to very severe. I’m somewhere in the middle. I’ve got flat cheekbones, slightly slanted eyes, and no ears — well, kind of. I’ve got things that look a bit like ears, but no ear canals. Pretty wild. Great for holding glasses, but that’s about it.</p>
+            <p>It’s a rare genetic condition that mainly affects the face. There are different forms — from mild to very
+              severe. I’m somewhere in the middle. I’ve got flat cheekbones, slightly slanted eyes, and no ears — well,
+              kind of. I’ve got things that look a bit like ears, but no ear canals. Pretty wild. Great for holding
+              glasses, but that’s about it.</p>
 
-            <p>For the curious ones with search engines: I’m “technically” similar to the twin sisters from <em>“Shake My Beauty.”</em> If that helps?</p>
+            <p>For the curious ones with search engines: I’m “technically” similar to the twin sisters from <em>“Shake
+              My Beauty.”</em> If that helps?</p>
 
-            <p>So yeah, I’ve got hearing aids. Pretty discreet, attached magnetically to implants in the bone (someone once told me, <em>“That’s some cyberpunk stuff!”</em>). Two tiny devices, on and off in seconds! Pull them off — instant silence. Bonus: they connect via Bluetooth, so I can stream sound directly into them.</p>
+            <p>So yeah, I’ve got hearing aids. Pretty discreet, attached magnetically to implants in the bone (someone
+              once told me, <em>“That’s some cyberpunk stuff!”</em>). Two tiny devices, on and off in seconds! Pull them
+              off — instant silence. Bonus: they connect via Bluetooth, so I can stream sound directly into them.</p>
 
-            <p>I’ve also got a not-so-great jaw and a slightly asymmetric mouth, not to mention orthodontic stuff. I eat <em>so</em> slowly and have to be careful all the time…</p>
+            <p>I’ve also got a not-so-great jaw and a slightly asymmetric mouth, not to mention orthodontic stuff. I eat
+              <em>so</em> slowly and have to be careful all the time…</p>
 
-            <p>I’ve had a bunch of surgeries since I was born — from <em>“life-saving”</em> to <em>“strongly recommended.”</em> They’ve definitely worn me out. I turned down the more cosmetic ones. Honestly, I just didn’t have the strength…</p>
+            <p>I’ve had a bunch of surgeries since I was born — from <em>“life-saving”</em> to <em>“strongly
+              recommended.”</em> They’ve definitely worn me out. I turned down the more cosmetic ones. Honestly, I just
+              didn’t have the strength…</p>
 
-            <p>Up until middle school, I just powered through. But things got worse. 8th grade was the worst. Add a major surgery to that — it broke me.</p>
+            <p>Up until middle school, I just powered through. But things got worse. 8th grade was the worst. Add a
+              major surgery to that — it broke me.</p>
 
-            <p>Mom pulled me out of school. They were thinking about skipping me a grade — turns out your skull can be crooked and your brain still functional — so the timing made sense. I eventually adjusted to my new life: always at home. I didn’t have many friends before, but now the count dropped to zero. Hey, I’m still here — <em>so I guess I survived just fine, lone wolf style.</em></p>
+            <p>Mom pulled me out of school. They were thinking about skipping me a grade — turns out your skull can be
+              crooked and your brain still functional — so the timing made sense. I eventually adjusted to my new life:
+              always at home. I didn’t have many friends before, but now the count dropped to zero. Hey, I’m still here
+              — <em>so I guess I survived just fine, lone wolf style.</em></p>
 
             <p>Anyway, enough about that.</p>
 
             <p>The novel? Oh, right…</p>
 
-            <p>It kicks off at the start of senior year. Junior year had already been rough. When I saw the program, I instantly knew things were going to go <em>badly</em>…</p>
+            <p>It kicks off at the start of senior year. Junior year had already been rough. When I saw the program, I
+              instantly knew things were going to go <em>badly</em>…</p>
 
-            <p>Look, I never claimed to be a genius, okay? You can be clever, but if something won’t stick, it just won’t stick. End of story.</p>
+            <p>Look, I never claimed to be a genius, okay? You can be clever, but if something won’t stick, it just
+              won’t stick. End of story.</p>
 
             <p>I hate that feeling — not being able to do something. But you’ll see, if you keep reading.</p>
 
-            <p>It’s just <a href="#links">down the page 👇</a>. Someone I know poured their heart into it. By supporting them, you’re supporting all of us. And you’ll make more than one person smile… 🙏😉</p>
+            <p>It’s just <a href="#links">down the page 👇</a>. Someone I know poured their heart into it. By supporting
+              them, you’re supporting all of us. And you’ll make more than one person smile… 🙏😉</p>
           </div>
 
 
@@ -469,35 +667,45 @@
             <section class="interview-fabien">
               <p><strong>Ironically, I wasn’t exactly a math whiz at first.</strong></p>
 
-              <p>I made it through grade school and high school with a decent understanding — very textbook, very average grades.</p>
+              <p>I made it through grade school and high school with a decent understanding — very textbook, very
+                average grades.</p>
 
-              <p>Then one encounter changed everything. A remarkable teacher. My own Mr. Keating — watch <em>“Dead Poets Society”</em> if the name doesn’t ring a bell.</p>
+              <p>Then one encounter changed everything. A remarkable teacher. My own Mr. Keating — watch <em>“Dead Poets
+                Society”</em> if the name doesn’t ring a bell.</p>
 
-              <p>He left a mark. Inspired me. Opened something inside me. <em>Showed me another way.</em><br>The idea that knowledge and mastery are deeply tied to who you are, deep down.</p>
+              <p>He left a mark. Inspired me. Opened something inside me. <em>Showed me another way.</em><br>The idea
+                that knowledge and mastery are deeply tied to who you are, deep down.</p>
 
-              <p>After getting my PhD, I decided to follow in his footsteps.<br>I chose to teach — in a different way, mostly through private tutoring.</p>
+              <p>After getting my PhD, I decided to follow in his footsteps.<br>I chose to teach — in a different way,
+                mostly through private tutoring.</p>
 
-              <p>And it’s been everything I hoped for. I receive just as much as I give.<br>The variety of minds and people is a gift I savor every time.</p>
+              <p>And it’s been everything I hoped for. I receive just as much as I give.<br>The variety of minds and
+                people is a gift I savor every time.</p>
 
-              <p>Understanding how people think — not by dissecting it, but intuitively, almost systemically — is just as exciting as solving a proof.</p>
+              <p>Understanding how people think — not by dissecting it, but intuitively, almost systemically — is just
+                as exciting as solving a proof.</p>
 
               <p><strong>Then I met Alicia.</strong></p>
 
               <p>Like many who’ve faced real challenges, she’s complex, intense, and genuine.</p>
 
-              <p>Rebellious, cynical, resigned, too.<br>And of course, she doesn’t believe in herself.<br>Doesn’t see the light she carries.</p>
+              <p>Rebellious, cynical, resigned, too.<br>And of course, she doesn’t believe in herself.<br>Doesn’t see
+                the light she carries.</p>
 
-              <p>It took time for us to connect, to understand, to really appreciate what we each had to give one another.</p>
+              <p>It took time for us to connect, to understand, to really appreciate what we each had to give one
+                another.</p>
 
               <p><em>A few months…</em></p>
 
               <p><em>Just the right amount of time.</em></p>
 
-              <p>I won’t spoil everything here.<br>But if you’ve made it this far, maybe you’re wondering what lies behind a face no one expects.</p>
+              <p>I won’t spoil everything here.<br>But if you’ve made it this far, maybe you’re wondering what lies
+                behind a face no one expects.</p>
 
               <p>Read <strong>La constante manquante</strong> — but please, <em>without expectations.</em></p>
 
-              <p>Let yourself be carried gently.<br>Take the time to really listen to Alicia, like I did. Reflect, one step at a time.</p>
+              <p>Let yourself be carried gently.<br>Take the time to really listen to Alicia, like I did. Reflect, one
+                step at a time.</p>
 
               <p>I found so much of myself in her.<br>Maybe you will too.</p>
             </section>
@@ -531,166 +739,8 @@
           Ebook (Apple Books)
         </a></p>
 
-        <h3 class="fr">Réseaux</h3>
-        <h3 class="en">Social Networks</h3>
-        <a href="https://www.facebook.com/LaConstanteManquante/" target="_blank" rel="noopener noreferrer"
-           style="text-decoration: none; display: inline-flex; align-items: center;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877f2"
-               aria-hidden="true" style="margin-right: 4px;">
-            <path
-              d="M22.675 0h-21.35C.596 0 0 .593 0 1.326v21.348C0 23.408.596 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116C23.405 24 24 23.408 24 22.674V1.326C24 .593 23.405 0 22.675 0z"/>
-          </svg>
-          <span style="color: #1877f2;">Facebook</span>
-        </a><br/>
-        <a href="https://www.instagram.com/laconstantemanquante/" target="_blank" rel="noopener noreferrer"
-           style="text-decoration: none; display: inline-flex; align-items: center;">
-
-          <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 264.5833 264.5833"
-            version="1.1"
-            id="svg15"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:svg="http://www.w3.org/2000/svg">
-            <defs
-              id="defs11">
-              <radialGradient
-                id="f"
-                cx="158.429"
-                cy="578.088"
-                r="52.3515"
-                xlink:href="#a"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="matrix(0 -4.03418 4.28018 0 -2332.2273 942.2356)"
-                fx="158.429"
-                fy="578.088" />
-              <radialGradient
-                xlink:href="#b"
-                id="g"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="matrix(.67441 -1.16203 1.51283 .87801 -814.3657 -47.8354)"
-                cx="172.6149"
-                cy="600.6924"
-                fx="172.6149"
-                fy="600.6924"
-                r="65" />
-              <radialGradient
-                xlink:href="#c"
-                id="h"
-                cx="144.012"
-                cy="51.3367"
-                fx="144.012"
-                fy="51.3367"
-                r="67.081"
-                gradientTransform="matrix(-2.3989 .67549 -.23008 -.81732 464.9957 -26.4035)"
-                gradientUnits="userSpaceOnUse" />
-              <radialGradient
-                xlink:href="#d"
-                id="e"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="matrix(-3.10797 .87652 -.6315 -2.23914 1345.6503 1374.1983)"
-                cx="199.7884"
-                cy="628.4379"
-                fx="199.7884"
-                fy="628.4379"
-                r="52.3515" />
-              <linearGradient
-                id="d">
-                <stop
-                  offset="0"
-                  stop-color="#ff005f"
-                  id="stop1" />
-                <stop
-                  offset="1"
-                  stop-color="#fc01d8"
-                  id="stop2" />
-              </linearGradient>
-              <linearGradient
-                id="c">
-                <stop
-                  offset="0"
-                  stop-color="#780cff"
-                  id="stop3" />
-                <stop
-                  stop-color="#820bff"
-                  offset="1"
-                  stop-opacity="0"
-                  id="stop4" />
-              </linearGradient>
-              <linearGradient
-                id="b">
-                <stop
-                  offset="0"
-                  stop-color="#fc0"
-                  id="stop5" />
-                <stop
-                  offset="1"
-                  stop-color="#fc0"
-                  stop-opacity="0"
-                  id="stop6" />
-              </linearGradient>
-              <linearGradient
-                id="a">
-                <stop
-                  offset="0"
-                  stop-color="#fc0"
-                  id="stop7" />
-                <stop
-                  offset=".1242"
-                  stop-color="#fc0"
-                  id="stop8" />
-                <stop
-                  offset=".5672"
-                  stop-color="#fe4a05"
-                  id="stop9" />
-                <stop
-                  offset=".6942"
-                  stop-color="#ff0f3f"
-                  id="stop10" />
-                <stop
-                  offset="1"
-                  stop-color="#fe0657"
-                  stop-opacity="0"
-                  id="stop11" />
-              </linearGradient>
-            </defs>
-            <g
-              id="g15">
-              <path
-                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
-                fill="url(#e)"
-                transform="translate(-71.8155 -18.1429)"
-                id="path11" />
-              <path
-                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
-                fill="url(#f)"
-                transform="translate(-71.8155 -18.1429)"
-                id="path12" />
-              <path
-                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
-                fill="url(#g)"
-                transform="translate(-71.8155 -18.1429)"
-                id="path13" />
-              <path
-                d="M204.1503 18.1429c-55.2305 0-71.3834.057-74.5232.3175-11.3342.9424-18.387 2.7275-26.0708 6.554-5.9214 2.9413-10.5915 6.3506-15.2005 11.1298-8.3938 8.7157-13.481 19.4383-15.3226 32.1842-.8953 6.1877-1.1558 7.4496-1.2087 39.0558-.0203 10.5354 0 24.4007 0 42.9984 0 55.2008.061 71.3418.3256 74.4764.9157 11.032 2.6453 17.9728 6.3081 25.565 7 14.5329 20.369 25.4428 36.119 29.5137 5.4535 1.4044 11.4767 2.1779 19.2092 2.5442 3.2762.1425 36.6684.2443 70.081.2443 33.4127 0 66.8253-.0407 70.02-.2035 8.9535-.4214 14.1526-1.1195 19.9011-2.6054 15.8517-4.0912 28.9767-14.8383 36.119-29.5748 3.5916-7.409 5.4128-14.6144 6.237-25.0704.179-2.2796.2543-38.6263.2543-74.924 0-36.304-.0814-72.5835-.2605-74.8632-.8343-10.6249-2.6555-17.7692-6.363-25.3207-3.0421-6.1816-6.42-10.798-11.324-15.518-8.752-8.3616-19.4555-13.4502-32.2101-15.2902-6.18-.8936-7.411-1.1582-39.033-1.2131z"
-                fill="url(#h)"
-                transform="translate(-71.8155 -18.1429)"
-                id="path14" />
-              <path
-                d="M132.3452 33.973c-26.7167 0-30.0696.1167-40.5629.5939-10.4727.4792-17.6212 2.136-23.8762 4.567-6.4701 2.5107-11.9586 5.8693-17.4265 11.3352-5.472 5.464-8.8332 10.9483-11.354 17.4116-2.4389 6.2524-4.099 13.3976-4.5703 23.8585-.4693 10.4854-.5923 13.8379-.5923 40.5348 0 26.697.1189 30.0371.5943 40.5225.4817 10.465 2.1397 17.6082 4.5703 23.8585 2.5147 6.4654 5.8758 11.9497 11.3458 17.4136 5.466 5.468 10.9544 8.8349 17.4204 11.3456 6.259 2.4309 13.4097 4.0877 23.8803 4.567 10.4933.477 13.8441.5938 40.5588.5938 26.7188 0 30.0615-.1167 40.5547-.5939 10.4728-.4792 17.6295-2.136 23.8885-4.567 6.4681-2.5106 11.9484-5.8775 17.4143-11.3455 5.472-5.4639 8.8332-10.9482 11.354-17.4115 2.4183-6.2524 4.0784-13.3976 4.5703-23.8585.4713-10.4854.5943-13.8277.5943-40.5246 0-26.697-.123-30.0473-.5943-40.5328-.4919-10.465-2.152-17.6081-4.5703-23.8584-2.5208-6.4654-5.882-11.9498-11.354-17.4137-5.4721-5.468-10.9442-8.8266-17.4204-11.3353-6.2714-2.4309-13.424-4.0877-23.8967-4.5669-10.4933-.4772-13.8339-.5939-40.5588-.5939zm-8.825 17.7147c2.6193-.0041 5.5418 0 8.825 0 26.2659 0 29.379.0942 39.7513.5652 9.5915.4383 14.7971 2.0397 18.2648 3.3852 4.5908 1.7817 7.8638 3.9116 11.3048 7.3521 3.4431 3.4406 5.5745 6.7173 7.3617 11.3046 1.3465 3.461 2.9512 8.6628 3.3877 18.2472.4714 10.3625.5739 13.4754.5739 39.7095 0 26.234-.1025 29.347-.5739 39.7095-.4386 9.5843-2.0412 14.7861-3.3877 18.2471-1.783 4.5874-3.9186 7.8539-7.3617 11.2923-3.443 3.4406-6.712 5.5704-11.3048 7.3521-3.4636 1.3517-8.6733 2.949-18.2648 3.3873-10.3702.471-13.4854.5734-39.7513.5734-26.2679 0-29.381-.1024-39.7513-.5734-9.5914-.4423-14.797-2.0438-18.2668-3.3893-4.5908-1.7817-7.87-3.9116-11.313-7.3521-3.4431-3.4405-5.5745-6.709-7.3617-11.2985-1.3465-3.461-2.9512-8.6628-3.3877-18.2471-.4714-10.3626-.5657-13.4754-.5657-39.7259 0-26.2504.0943-29.347.5657-39.7095.4386-9.5844 2.0412-14.7861 3.3877-18.2512 1.783-4.5874 3.9186-7.8641 7.3617-11.3046 3.443-3.4406 6.7222-5.5704 11.313-7.3562 3.4677-1.3517 8.6754-2.949 18.2668-3.3894 9.075-.4096 12.5919-.5324 30.9264-.553zm61.3363 16.322c-6.5173 0-11.805 5.2776-11.805 11.792 0 6.5125 5.2877 11.7962 11.805 11.7962 6.5172 0 11.8049-5.2837 11.8049-11.7962 0-6.5124-5.2877-11.796-11.805-11.796zm-52.5113 13.7826c-27.8993 0-50.5191 22.6031-50.5191 50.4817 0 27.8786 22.6198 50.4714 50.5191 50.4714s50.511-22.5928 50.511-50.4714c0-27.8786-22.6137-50.4817-50.513-50.4817zm0 17.7147c18.109 0 32.7914 14.6694 32.7914 32.767 0 18.0956-14.6824 32.767-32.7914 32.767-18.111 0-32.7913-14.6714-32.7913-32.767 0-18.0976 14.6803-32.767 32.7913-32.767z"
-                fill="#fff"
-                id="path15" />
-            </g>
-          </svg>
-
-
-
-          <span style="color: #ff0073ff;">Instagram</span>
-        </a>
-
+<!--        <h3 class="fr">Réseaux</h3>-->
+<!--        <h3 class="en">Social Networks</h3>-->
       </section>
     </main>
 
