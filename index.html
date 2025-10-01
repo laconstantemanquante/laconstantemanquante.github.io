@@ -838,23 +838,28 @@
         <h3 class="fr">Acheter le livre</h3>
         <h3 class="en">Buy the book</h3>
 
-        <p class="en">⚠️ French only for now — English edition coming Fall 2025! </p>
-        <p><a target="_blank" href="https://livres.bookelis.com/romans/69118-La-constante-manquante.html">
-          Format papier (296 pages) ou Ebook (Bookelis)
-        </a></p>
+        <p class="en">
+          <a target="_blank" href="https://www.amazon.com/dp/B0FTFYS1B5">
+            Paperback and Ebook
+          </a>
+        </p>
+        <div class="fr">
+          <p><a target="_blank" href="https://livres.bookelis.com/romans/69118-La-constante-manquante.html">
+            Format papier (296 pages) ou Ebook (Bookelis)
+          </a></p>
 
-        <p><a target="_blank" href="https://www.amazon.fr/dp/B0DN4PGWSD/ref=sr_1_1">
-          Ebook (Amazon)
-        </a></p>
+          <p><a target="_blank" href="https://www.amazon.fr/dp/B0DN4PGWSD/ref=sr_1_1">
+            Ebook (Amazon)
+          </a></p>
 
-        <p><a target="_blank" href="https://www.kobo.com/fr/fr/ebook/la-constante-manquante">
-          Ebook (Kobo)
-        </a></p>
+          <p><a target="_blank" href="https://www.kobo.com/fr/fr/ebook/la-constante-manquante">
+            Ebook (Kobo)
+          </a></p>
 
-        <p><a target="_blank" href="https://books.apple.com/fr/book/la-constante-manquante/id6746246391">
-          Ebook (Apple Books)
-        </a></p>
-
+          <p><a target="_blank" href="https://books.apple.com/fr/book/la-constante-manquante/id6746246391">
+            Ebook (Apple Books)
+          </a></p>
+        </div>
         <!--        <h3 class="fr">Réseaux</h3>-->
         <!--        <h3 class="en">Social Networks</h3>-->
 
@@ -887,7 +892,13 @@
       }
 
       const savedLang = localStorage.getItem("lang")
-      if (savedLang) setLang(savedLang)
+      if (savedLang) {
+        setLang(savedLang)
+      } else {
+        const userLang = navigator.language || navigator.userLanguage // fallback pour anciens navigateurs
+        const langCode = userLang.split('-')[0] // ex: "en-US" → "en"
+        setLang(langCode)
+      }
 
       // Theme toggle
       function toggleTheme() {
