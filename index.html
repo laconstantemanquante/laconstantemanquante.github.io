@@ -889,6 +889,7 @@
       function setLang(lang) {
         document.body.dataset.lang = lang
         localStorage.setItem("lang", lang)
+        applyLang(lang);
       }
 
       const savedLang = localStorage.getItem("lang")
@@ -951,36 +952,108 @@
       const container = document.getElementById("book-3d-container");
       container.innerHTML = ""; // supprime l’image responsive
 
+      // --- Three.js scène / caméra / rendu
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
       camera.position.z = 6;
 
-      const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(container.offsetWidth, container.offsetHeight);
       container.appendChild(renderer.domElement);
 
-      // Lumières
-      const ambient = new THREE.AmbientLight(0x222222);
-      scene.add(ambient);
-
+      // --- Lumières
+      scene.add(new THREE.AmbientLight(0x222222));
       const light = new THREE.DirectionalLight(0xffffff);
       light.position.set(0, 0, 6);
       scene.add(light);
 
-      // Chargement des textures
-      const loader = new THREE.TextureLoader();
-      const urls = [
-        "60df4c2704be844b0ef22aaf_edge.jpg", "60df4c2aef14323b06b286e3_spine.jpg",
-        "60df4c2f695f4a6bbd2c7e83_top.jpg", "60df4c33f3da90957cd90fac_bottom.jpg",
-        "60df4c38c1824853f089422f_front.jpg", "60df4c3c62ec16194da90021_back.jpg",
-      ];
-      const materials = urls.map(url => new THREE.MeshLambertMaterial({map: loader.load(url)}));
+      // --- Mapping textures par langue (ordre = right, left, top, bottom, front, back)
+      // Remplace les "en_*.jpg" par tes vrais fichiers EN.
+      const TEXTURES_BY_LANG = {
+        fr: [
+          "60df4c2704be844b0ef22aaf_edge.jpg",
+          "60df4c2aef14323b06b286e3_spine.jpg",
+          "60df4c2f695f4a6bbd2c7e83_top.jpg",
+          "60df4c33f3da90957cd90fac_bottom.jpg",
+          "60df4c38c1824853f089422f_front.jpg", // FRONT
+          "60df4c3c62ec16194da90021_back.jpg",
+        ],
+        en: [
+          "60df4c2704be844b0ef22aaf_edge.jpg",
+          "60df4c2aef14323b06b286e3_spine_us.jpg",
+          "60df4c2f695f4a6bbd2c7e83_top.jpg",
+          "60df4c33f3da90957cd90fac_bottom.jpg",
+          "60df4c38c1824853f089422f_front_us.jpg", // FRONT
+          "60df4c3c62ec16194da90021_back_us.jpg",
+        ]
+      };
 
-      const geometry = new THREE.BoxGeometry(3.5, 5, 0.5);
-      const cube = new THREE.Mesh(geometry, materials);
+      // --- Langue initiale
+      const getInitialLang = () => {
+        const stored = localStorage.getItem("lang");
+        if (stored === "fr" || stored === "en") return stored;
+        return (navigator.language || navigator.userLanguage || "fr").toLowerCase().startsWith("en") ? "en" : "fr";
+      };
+
+      // --- Loader + matériaux
+      const loader = new THREE.TextureLoader();
+      const placeholder = new THREE.MeshLambertMaterial({ color: 0xdddddd });
+      const materials = [0,1,2,3,4,5].map(() => placeholder.clone());
+
+      // --- Géométrie & mesh
+      const DEFAULT_HEIGHT = 5;   // hauteur de référence
+      const DEFAULT_DEPTH  = 0.5; // épaisseur visuelle
+      let cubeGeometry = new THREE.BoxGeometry(DEFAULT_HEIGHT * 0.7, DEFAULT_HEIGHT, DEFAULT_DEPTH);
+      const cube = new THREE.Mesh(cubeGeometry, materials);
       scene.add(cube);
 
-      // Variables de rotation
+      // --- Helpers
+      function setTextureOnMaterial(i, url) {
+        loader.load(
+          url,
+          (tex) => {
+            tex.colorSpace = THREE.SRGBColorSpace;
+
+            const getMax = renderer.capabilities.getMaxAnisotropy?.() || 1;
+            tex.anisotropy = Math.min(8, getMax);
+
+            materials[i].map = tex;
+            materials[i].needsUpdate = true;
+          },
+          undefined,
+          (err) => {
+            materials[i].map = null;
+            materials[i].color = new THREE.Color(0xaaaaaa);
+            materials[i].needsUpdate = true;
+            console.warn("Texture load failed:", url, err);
+          }
+        );
+      }
+
+      function resizeCubeToCover(width, height) {
+        // Ajuste largeur selon le ratio de la couverture FRONT
+        const frontAspect = width / height;          // W/H
+        const targetHeight = DEFAULT_HEIGHT;         // on fixe la hauteur
+        const targetWidth  = frontAspect * targetHeight;
+
+        cube.geometry.dispose();
+        cube.geometry = new THREE.BoxGeometry(targetWidth, targetHeight, DEFAULT_DEPTH);
+      }
+
+      function applyLang(lang) {
+        const urls = TEXTURES_BY_LANG[lang] || TEXTURES_BY_LANG.fr;
+
+        // 1) Ajuster la géométrie d’après la couverture FRONT (index 4)
+        const frontUrl = urls[4];
+        const img = new Image();
+        img.onload = () => resizeCubeToCover(img.width, img.height);
+        img.src = frontUrl;
+
+        // 2) Mettre à jour les 6 faces
+        urls.forEach((url, i) => setTextureOnMaterial(i, url));
+      }
+
+      // --- Interaction
       let targetRotationX = 0;
       let targetRotationY = 0;
 
@@ -1000,30 +1073,56 @@
 
       container.addEventListener("wheel", (event) => {
         if (!event.shiftKey) return;
-
-        event.preventDefault(); // évite le scroll de la page
-
+        event.preventDefault();
         const zoomSpeed = 0.3;
         const delta = Math.sign(event.deltaY);
         camera.position.z = Math.min(10, Math.max(3, camera.position.z + delta * zoomSpeed));
-      }, {passive: false});
+      }, { passive: false });
 
+      // --- Animation
       function animate() {
         requestAnimationFrame(animate);
         cube.rotation.x += (targetRotationX - cube.rotation.x) * 0.1;
         cube.rotation.y += (targetRotationY - cube.rotation.y) * 0.1;
         renderer.render(scene, camera);
       }
-
       animate();
 
-      // Resize adaptatif
+      // --- Resize
       window.addEventListener('resize', () => {
         camera.aspect = container.offsetWidth / container.offsetHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.offsetWidth, container.offsetHeight);
       });
+
+      // --- Sync langue
+      // a) changement depuis un autre onglet
+      window.addEventListener("storage", (e) => {
+        if (e.key === "lang" && (e.newValue === "fr" || e.newValue === "en")) {
+          applyLang(e.newValue);
+        }
+      });
+
+      // b) changement dans CE document : après localStorage.setItem('lang', xx)
+      //    déclenche aussi cet event pour notifier la page actuelle
+      //    window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: xx }))
+      window.addEventListener("app:lang-changed", (e) => {
+        const lang = e.detail;
+        if (lang === "fr" || lang === "en") applyLang(lang);
+      });
+
+      // --- Init
+      applyLang(getInitialLang());
+
+      // (Optionnel) Exemple de setter :
+      // function setLang(lang) {
+      //   document.body.dataset.lang = lang;
+      //   localStorage.setItem("lang", lang);
+      //   window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: lang }));
+      // }
     </script>
+
+
 
   </body>
 </html>
