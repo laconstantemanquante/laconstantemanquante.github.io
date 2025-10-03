@@ -241,3 +241,14 @@ aside a {
 aside a:hover{
     filter: none;
 }
+
+.tagline {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--primary);
+    margin: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    max-width: 80%;
+    text-align: center;
+}

@@ -65,9 +65,14 @@
 
     <div id="cookie-banner"
          style="position: fixed; bottom: 0; left: 0; right: 0; background: #f2f2f2; padding: 1em; text-align: center; z-index: 1000;">
-      Ce site utilise Google Analytics (cookies anonymes) pour améliorer le contenu. <br/>
+      <div class="fr">Ce site utilise Google Analytics (cookies anonymes) pour améliorer le contenu. <br/>
       <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accepter</button>
-      <button onclick="declineAnalytics()" style="margin: 0.5em;">Refuser</button>
+        <button onclick="declineAnalytics()" style="margin: 0.5em;">Refuser</button></div>
+      <div class="en">
+        This site uses Google Analytics (anonymous cookies) to improve its content. <br/>
+        <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accept</button>
+        <button onclick="declineAnalytics()" style="margin: 0.5em;">Decline</button>
+      </div>
     </div>
 
     <header class="container">
@@ -75,7 +80,8 @@
         <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
         <div class="nav-menu" id="mobileMenu">
           <div class="nav-left">
-            <strong>La constante manquante</strong>
+            <strong class="fr">La constante manquante</strong>
+            <strong class="en">The missing constant</strong>
             <a href="#book" onclick="toggleMobileMenu()" class="fr">Le livre</a>
             <a href="#book" onclick="toggleMobileMenu()" class="en">The book</a>
             <a href="#characters" onclick="toggleMobileMenu()" class="fr">Les personnages</a>
@@ -257,6 +263,15 @@
     </header>
 
     <main class="container">
+      <article class="tagline fr">
+        Une histoire douce sur la différence, la force intérieure, et la révolution silencieuse d’apprendre à
+        s’aimer enfin — en voyant sa singularité comme une force. Pour toutes celles et ceux qui se sont un jour sentis
+        invisibles, pas à la hauteur… cette histoire est la vôtre, aussi.🤟
+      </article>
+      <article class="tagline en">
+        A tender story of difference, inner strength, and the quiet revolution of finally loving who you are —
+        and seeing your uniqueness as a strength. For anyone who’s ever felt unseen, not enough… this story is yours too.🤟
+      </article>
       <section id="book">
         <h2 class="fr">Le livre</h2>
         <h2 class="en">The book</h2>
@@ -440,8 +455,8 @@
 
             <p><strong>Hey there!</strong></p>
 
-            <p>If you’re here, maybe we’ve crossed paths somehow — or maybe you’ve heard of <em>La constante
-              manquante</em>, a novel about… well, self-acceptance.</p>
+            <p>If you’re here, maybe we’ve crossed paths somehow — or maybe you’ve heard of <em>The missing constant</em>,
+              a novel about… well, self-acceptance.</p>
 
             <p><em>“Among other things,”</em> someone whispers. Yeah, among other things…</p>
 
@@ -638,7 +653,7 @@
               <p>I won’t spoil everything here.<br>
                 But if you’ve made it this far, maybe you’re wondering what lives beyond a first glance.</p>
 
-              <p>Read <strong>La constante manquante</strong> — and let the story carry you.</p>
+              <p>Read <strong>The missing constant</strong> — and let the story carry you.</p>
 
               <p>Take the time to listen to Alicia. One step at a time.</p>
 
