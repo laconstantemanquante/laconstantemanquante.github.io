@@ -908,11 +908,16 @@
     <!--      gtag('config', 'G-JCW6JZHB9D'); // Remplace par ton ID GA4-->
     <!--    </script>-->
     <script>
+
+
       // Lang switcher
       function setLang(lang) {
         document.body.dataset.lang = lang
         localStorage.setItem("lang", lang)
-        applyLang(lang);
+        try {
+          applyLang(lang);
+        } catch (e) {
+        }
       }
 
       const savedLang = localStorage.getItem("lang")
@@ -978,9 +983,9 @@
       const isCoarsePointer = matchMedia("(pointer: coarse)").matches;              // doigts (mobile/tablette)
       const smallViewport = matchMedia("(max-width: 768px)").matches;              // breakpoint
       const prefersReduce = matchMedia("(prefers-reduced-motion: reduce)").matches; // accessibilité
-      const lowMemory = (navigator.deviceMemory && navigator.deviceMemory <= 2); // Chrome/Android
+      // const lowMemory = (navigator.deviceMemory && navigator.deviceMemory <= 2); // Chrome/Android
 
-      const SKIP_3D = isCoarsePointer || smallViewport || prefersReduce || lowMemory;
+      const SKIP_3D = isCoarsePointer || smallViewport || prefersReduce;
 
       if (SKIP_3D) {
         // On garde l’image responsive existante : ne RIEN faire
