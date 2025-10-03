@@ -66,8 +66,9 @@
     <div id="cookie-banner"
          style="position: fixed; bottom: 0; left: 0; right: 0; background: #f2f2f2; padding: 1em; text-align: center; z-index: 1000;">
       <div class="fr">Ce site utilise Google Analytics (cookies anonymes) pour améliorer le contenu. <br/>
-      <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accepter</button>
-        <button onclick="declineAnalytics()" style="margin: 0.5em;">Refuser</button></div>
+        <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accepter</button>
+        <button onclick="declineAnalytics()" style="margin: 0.5em;">Refuser</button>
+      </div>
       <div class="en">
         This site uses Google Analytics (anonymous cookies) to improve its content. <br/>
         <button onclick="acceptAnalytics()" style="margin: 0.5em;">Accept</button>
@@ -270,7 +271,8 @@
       </article>
       <article class="tagline en">
         A tender story of difference, inner strength, and the quiet revolution of finally loving who you are —
-        and seeing your uniqueness as a strength. For anyone who’s ever felt unseen, not enough… this story is yours too.🤟
+        and seeing your uniqueness as a strength. For anyone who’s ever felt unseen, not enough… this story is yours
+        too.🤟
       </article>
       <section id="book">
         <h2 class="fr">Le livre</h2>
@@ -281,12 +283,12 @@
             <picture class="fr">
               <source srcset="simple_cover_480.jpg" media="(max-width: 600px)">
               <source srcset="simple_cover_768.jpg" media="(max-width: 1024px)">
-              <img src="simple_cover.jpg" alt="Couverture du livre" />
+              <img src="simple_cover.jpg" alt="Couverture du livre"/>
             </picture>
             <picture class="en">
               <source srcset="simple_cover_us_480_2.jpg" media="(max-width: 600px)">
               <source srcset="simple_cover_us_768_2.jpg" media="(max-width: 1024px)">
-              <img src="simple_cover_us_2.jpg" alt="Cover of the book" />
+              <img src="simple_cover_us_2.jpg" alt="Cover of the book"/>
             </picture>
           </figure>
           <section class="book"></section>
@@ -460,7 +462,8 @@
 
             <p><strong>Hey there!</strong></p>
 
-            <p>If you’re here, maybe we’ve crossed paths somehow — or maybe you’ve heard of <em>The missing constant</em>,
+            <p>If you’re here, maybe we’ve crossed paths somehow — or maybe you’ve heard of <em>The missing
+              constant</em>,
               a novel about… well, self-acceptance.</p>
 
             <p><em>“Among other things,”</em> someone whispers. Yeah, among other things…</p>
@@ -970,178 +973,196 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"></script>
     <script defer>
       const container = document.getElementById("book-3d-container");
-      container.innerHTML = ""; // supprime l’image responsive
 
-      // --- Three.js scène / caméra / rendu
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-      camera.position.z = 6;
+      // --- Règles pour ne PAS lancer la 3D
+      const isCoarsePointer = matchMedia("(pointer: coarse)").matches;              // doigts (mobile/tablette)
+      const smallViewport = matchMedia("(max-width: 768px)").matches;              // breakpoint
+      const prefersReduce = matchMedia("(prefers-reduced-motion: reduce)").matches; // accessibilité
+      const lowMemory = (navigator.deviceMemory && navigator.deviceMemory <= 2); // Chrome/Android
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(container.offsetWidth, container.offsetHeight);
-      container.appendChild(renderer.domElement);
+      const SKIP_3D = isCoarsePointer || smallViewport || prefersReduce || lowMemory;
 
-      // --- Lumières
-      scene.add(new THREE.AmbientLight(0x222222));
-      const light = new THREE.DirectionalLight(0xffffff);
-      light.position.set(0, 0, 6);
-      scene.add(light);
+      if (SKIP_3D) {
+        // On garde l’image responsive existante : ne RIEN faire
+        // (optionnel) tu peux ajouter une classe pour styliser différemment
+        container.classList.add("no-3d");
+        // 👇 et sortir proprement
+      } else {
 
-      // --- Mapping textures par langue (ordre = right, left, top, bottom, front, back)
-      // Remplace les "en_*.jpg" par tes vrais fichiers EN.
-      const TEXTURES_BY_LANG = {
-        fr: [
-          "60df4c2704be844b0ef22aaf_edge.jpg",
-          "60df4c2aef14323b06b286e3_spine.jpg",
-          "60df4c2f695f4a6bbd2c7e83_top.jpg",
-          "60df4c33f3da90957cd90fac_bottom.jpg",
-          "60df4c38c1824853f089422f_front.jpg", // FRONT
-          "60df4c3c62ec16194da90021_back.jpg",
-        ],
-        en: [
-          "60df4c2704be844b0ef22aaf_edge.jpg",
-          "60df4c2aef14323b06b286e3_spine_us.jpg",
-          "60df4c2f695f4a6bbd2c7e83_top.jpg",
-          "60df4c33f3da90957cd90fac_bottom.jpg",
-          "60df4c38c1824853f089422f_front_us.jpg", // FRONT
-          "60df4c3c62ec16194da90021_back_us.jpg",
-        ]
-      };
+        const container = document.getElementById("book-3d-container");
+        container.innerHTML = ""; // supprime l’image responsive
 
-      // --- Langue initiale
-      const getInitialLang = () => {
-        const stored = localStorage.getItem("lang");
-        if (stored === "fr" || stored === "en") return stored;
-        return (navigator.language || navigator.userLanguage || "fr").toLowerCase().startsWith("en") ? "en" : "fr";
-      };
+        // --- Three.js scène / caméra / rendu
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+        camera.position.z = 6;
 
-      // --- Loader + matériaux
-      const loader = new THREE.TextureLoader();
-      const placeholder = new THREE.MeshLambertMaterial({ color: 0xdddddd });
-      const materials = [0,1,2,3,4,5].map(() => placeholder.clone());
-
-      // --- Géométrie & mesh
-      const DEFAULT_HEIGHT = 5;   // hauteur de référence
-      const DEFAULT_DEPTH  = 0.5; // épaisseur visuelle
-      let cubeGeometry = new THREE.BoxGeometry(DEFAULT_HEIGHT * 0.7, DEFAULT_HEIGHT, DEFAULT_DEPTH);
-      const cube = new THREE.Mesh(cubeGeometry, materials);
-      scene.add(cube);
-
-      // --- Helpers
-      function setTextureOnMaterial(i, url) {
-        loader.load(
-          url,
-          (tex) => {
-            tex.colorSpace = THREE.SRGBColorSpace;
-
-            const getMax = renderer.capabilities.getMaxAnisotropy?.() || 1;
-            tex.anisotropy = Math.min(8, getMax);
-
-            materials[i].map = tex;
-            materials[i].needsUpdate = true;
-          },
-          undefined,
-          (err) => {
-            materials[i].map = null;
-            materials[i].color = new THREE.Color(0xaaaaaa);
-            materials[i].needsUpdate = true;
-            console.warn("Texture load failed:", url, err);
-          }
-        );
-      }
-
-      function resizeCubeToCover(width, height) {
-        // Ajuste largeur selon le ratio de la couverture FRONT
-        const frontAspect = width / height;          // W/H
-        const targetHeight = DEFAULT_HEIGHT;         // on fixe la hauteur
-        const targetWidth  = frontAspect * targetHeight;
-
-        cube.geometry.dispose();
-        cube.geometry = new THREE.BoxGeometry(targetWidth, targetHeight, DEFAULT_DEPTH);
-      }
-
-      function applyLang(lang) {
-        const urls = TEXTURES_BY_LANG[lang] || TEXTURES_BY_LANG.fr;
-
-        // 1) Ajuster la géométrie d’après la couverture FRONT (index 4)
-        const frontUrl = urls[4];
-        const img = new Image();
-        img.onload = () => resizeCubeToCover(img.width, img.height);
-        img.src = frontUrl;
-
-        // 2) Mettre à jour les 6 faces
-        urls.forEach((url, i) => setTextureOnMaterial(i, url));
-      }
-
-      // --- Interaction
-      let targetRotationX = 0;
-      let targetRotationY = 0;
-
-      container.addEventListener("mousemove", (event) => {
-        const bounds = container.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width;
-        const y = (event.clientY - bounds.top) / bounds.height;
-
-        targetRotationY = (x - 0.5) * 2 * Math.PI;
-        targetRotationX = (0.5 - y) * Math.PI;
-      });
-
-      container.addEventListener("mouseleave", () => {
-        targetRotationX = 0;
-        targetRotationY = 0;
-      });
-
-      container.addEventListener("wheel", (event) => {
-        if (!event.shiftKey) return;
-        event.preventDefault();
-        const zoomSpeed = 0.3;
-        const delta = Math.sign(event.deltaY);
-        camera.position.z = Math.min(10, Math.max(3, camera.position.z + delta * zoomSpeed));
-      }, { passive: false });
-
-      // --- Animation
-      function animate() {
-        requestAnimationFrame(animate);
-        cube.rotation.x += (targetRotationX - cube.rotation.x) * 0.1;
-        cube.rotation.y += (targetRotationY - cube.rotation.y) * 0.1;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      // --- Resize
-      window.addEventListener('resize', () => {
-        camera.aspect = container.offsetWidth / container.offsetHeight;
-        camera.updateProjectionMatrix();
+        const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
         renderer.setSize(container.offsetWidth, container.offsetHeight);
-      });
+        container.appendChild(renderer.domElement);
 
-      // --- Sync langue
-      // a) changement depuis un autre onglet
-      window.addEventListener("storage", (e) => {
-        if (e.key === "lang" && (e.newValue === "fr" || e.newValue === "en")) {
-          applyLang(e.newValue);
+        // --- Lumières
+        scene.add(new THREE.AmbientLight(0x222222));
+        const light = new THREE.DirectionalLight(0xffffff);
+        light.position.set(0, 0, 6);
+        scene.add(light);
+
+        // --- Mapping textures par langue (ordre = right, left, top, bottom, front, back)
+        // Remplace les "en_*.jpg" par tes vrais fichiers EN.
+        const TEXTURES_BY_LANG = {
+          fr: [
+            "60df4c2704be844b0ef22aaf_edge.jpg",
+            "60df4c2aef14323b06b286e3_spine.jpg",
+            "60df4c2f695f4a6bbd2c7e83_top.jpg",
+            "60df4c33f3da90957cd90fac_bottom.jpg",
+            "60df4c38c1824853f089422f_front.jpg", // FRONT
+            "60df4c3c62ec16194da90021_back.jpg",
+          ],
+          en: [
+            "60df4c2704be844b0ef22aaf_edge.jpg",
+            "60df4c2aef14323b06b286e3_spine_us.jpg",
+            "60df4c2f695f4a6bbd2c7e83_top.jpg",
+            "60df4c33f3da90957cd90fac_bottom.jpg",
+            "60df4c38c1824853f089422f_front_us.jpg", // FRONT
+            "60df4c3c62ec16194da90021_back_us.jpg",
+          ]
+        };
+
+        // --- Langue initiale
+        const getInitialLang = () => {
+          const stored = localStorage.getItem("lang");
+          if (stored === "fr" || stored === "en") return stored;
+          return (navigator.language || navigator.userLanguage || "fr").toLowerCase().startsWith("en") ? "en" : "fr";
+        };
+
+        // --- Loader + matériaux
+        const loader = new THREE.TextureLoader();
+        const placeholder = new THREE.MeshLambertMaterial({color: 0xdddddd});
+        const materials = [0, 1, 2, 3, 4, 5].map(() => placeholder.clone());
+
+        // --- Géométrie & mesh
+        const DEFAULT_HEIGHT = 5;   // hauteur de référence
+        const DEFAULT_DEPTH = 0.5; // épaisseur visuelle
+        let cubeGeometry = new THREE.BoxGeometry(DEFAULT_HEIGHT * 0.7, DEFAULT_HEIGHT, DEFAULT_DEPTH);
+        const cube = new THREE.Mesh(cubeGeometry, materials);
+        scene.add(cube);
+
+        // --- Helpers
+        function setTextureOnMaterial(i, url) {
+          loader.load(
+            url,
+            (tex) => {
+              tex.colorSpace = THREE.SRGBColorSpace;
+
+              const getMax = renderer.capabilities.getMaxAnisotropy?.() || 1;
+              tex.anisotropy = Math.min(8, getMax);
+
+              materials[i].map = tex;
+              materials[i].needsUpdate = true;
+            },
+            undefined,
+            (err) => {
+              materials[i].map = null;
+              materials[i].color = new THREE.Color(0xaaaaaa);
+              materials[i].needsUpdate = true;
+              console.warn("Texture load failed:", url, err);
+            }
+          );
         }
-      });
 
-      // b) changement dans CE document : après localStorage.setItem('lang', xx)
-      //    déclenche aussi cet event pour notifier la page actuelle
-      //    window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: xx }))
-      window.addEventListener("app:lang-changed", (e) => {
-        const lang = e.detail;
-        if (lang === "fr" || lang === "en") applyLang(lang);
-      });
+        function resizeCubeToCover(width, height) {
+          // Ajuste largeur selon le ratio de la couverture FRONT
+          const frontAspect = width / height;          // W/H
+          const targetHeight = DEFAULT_HEIGHT;         // on fixe la hauteur
+          const targetWidth = frontAspect * targetHeight;
 
-      // --- Init
-      applyLang(getInitialLang());
+          cube.geometry.dispose();
+          cube.geometry = new THREE.BoxGeometry(targetWidth, targetHeight, DEFAULT_DEPTH);
+        }
 
-      // (Optionnel) Exemple de setter :
-      // function setLang(lang) {
-      //   document.body.dataset.lang = lang;
-      //   localStorage.setItem("lang", lang);
-      //   window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: lang }));
-      // }
+        function applyLang(lang) {
+          const urls = TEXTURES_BY_LANG[lang] || TEXTURES_BY_LANG.fr;
+
+          // 1) Ajuster la géométrie d’après la couverture FRONT (index 4)
+          const frontUrl = urls[4];
+          const img = new Image();
+          img.onload = () => resizeCubeToCover(img.width, img.height);
+          img.src = frontUrl;
+
+          // 2) Mettre à jour les 6 faces
+          urls.forEach((url, i) => setTextureOnMaterial(i, url));
+        }
+
+        // --- Interaction
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+
+        container.addEventListener("mousemove", (event) => {
+          const bounds = container.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width;
+          const y = (event.clientY - bounds.top) / bounds.height;
+
+          targetRotationY = (x - 0.5) * 2 * Math.PI;
+          targetRotationX = (0.5 - y) * Math.PI;
+        });
+
+        container.addEventListener("mouseleave", () => {
+          targetRotationX = 0;
+          targetRotationY = 0;
+        });
+
+        container.addEventListener("wheel", (event) => {
+          if (!event.shiftKey) return;
+          event.preventDefault();
+          const zoomSpeed = 0.3;
+          const delta = Math.sign(event.deltaY);
+          camera.position.z = Math.min(10, Math.max(3, camera.position.z + delta * zoomSpeed));
+        }, {passive: false});
+
+        // --- Animation
+        function animate() {
+          requestAnimationFrame(animate);
+          cube.rotation.x += (targetRotationX - cube.rotation.x) * 0.1;
+          cube.rotation.y += (targetRotationY - cube.rotation.y) * 0.1;
+          renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // --- Resize
+        window.addEventListener('resize', () => {
+          camera.aspect = container.offsetWidth / container.offsetHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.offsetWidth, container.offsetHeight);
+        });
+
+        // --- Sync langue
+        // a) changement depuis un autre onglet
+        window.addEventListener("storage", (e) => {
+          if (e.key === "lang" && (e.newValue === "fr" || e.newValue === "en")) {
+            applyLang(e.newValue);
+          }
+        });
+
+        // b) changement dans CE document : après localStorage.setItem('lang', xx)
+        //    déclenche aussi cet event pour notifier la page actuelle
+        //    window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: xx }))
+        window.addEventListener("app:lang-changed", (e) => {
+          const lang = e.detail;
+          if (lang === "fr" || lang === "en") applyLang(lang);
+        });
+
+        // --- Init
+        applyLang(getInitialLang());
+
+        // (Optionnel) Exemple de setter :
+        // function setLang(lang) {
+        //   document.body.dataset.lang = lang;
+        //   localStorage.setItem("lang", lang);
+        //   window.dispatchEvent(new CustomEvent('app:lang-changed', { detail: lang }));
+        // }
+      }
     </script>
-
 
 
   </body>
