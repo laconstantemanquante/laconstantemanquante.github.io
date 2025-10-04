@@ -252,3 +252,108 @@ aside a:hover{
     max-width: 80%;
     text-align: center;
 }
+
+/* Reset puces + layout */
+#testimonials { margin-block: 1.25rem 2rem; }
+#testimonials ul.testimonials {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 0;
+    position: relative;
+    isolation: isolate;
+    /* hauteur fixe du slot d’affichage (adapter si besoin) */
+    --slot-h: 5rem;
+    min-height: var(--slot-h);
+}
+#testimonials ul.testimonials li::marker { content: ""; }
+#testimonials ul.testimonials li { list-style: none; }
+
+/* Cartes */
+#testimonials q {
+    margin: 0 0 .4rem 0;
+    font-style: italic;
+    line-height: 1.45;
+}
+#testimonials footer {
+    font-size: .9em;
+    float: right;
+    margin-top: 1rem;
+    color: color-mix(in oklab, currentColor 65%, transparent);
+}
+
+/* Carrousel CSS-only : on superpose les <li> et on en affiche 1 à la fois */
+#testimonials ul.testimonials li {
+    position: absolute;
+    inset: 0;
+    padding: .9rem 1rem;
+    /*border: 1px solid color-mix(in oklab, currentColor 14%, transparent);*/
+    /*border-radius: .75rem;*/
+    /*background: color-mix(in oklab, Canvas 92%, black 8%);*/
+    opacity: 0;
+    transform: translateY(8px);
+    animation: tslide 16s infinite ease-in-out;
+    /* Anti-reflow : force la hauteur visuelle du slot */
+    /*min-height: var(--slot-h);*/
+/*    display: grid;
+    align-content: start;
+    gap: .35rem;*/
+}
+
+/* Séquencement automatique par nth-child (4 items → 4 étapes) */
+#testimonials ul.testimonials li:nth-child(1) { animation-delay: 0s; }
+#testimonials ul.testimonials li:nth-child(2) { animation-delay: 4s; }
+#testimonials ul.testimonials li:nth-child(3) { animation-delay: 8s; }
+#testimonials ul.testimonials li:nth-child(4) { animation-delay: 12s; }
+
+/* Keyframes : fade + léger slide. Temps visible ~3s, transition ~1s. */
+@keyframes tslide {
+    0%   { opacity: 0; transform: translateY(8px); }
+    6%   { opacity: 1; transform: translateY(0); }
+    25%  { opacity: 1; transform: translateY(0); }
+    31%  { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    #testimonials ul.testimonials li {
+        animation: none;
+        opacity: 1;
+        position: static;
+        transform: none;
+        min-height: unset;
+    }
+    #testimonials ul.testimonials { display: grid; gap: .75rem; }
+}
+
+/* Bilingue : masque via data-lang (assure aussi aria-hidden côté script si possible) */
+[data-lang="fr"] #testimonials .en { display: none !important; }
+[data-lang="en"] #testimonials .fr { display: none !important; }
+
+.cta-book {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.cta-book .button {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 1.05rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cta-book .button:hover,
+.cta-book .button:focus {
+    background: var(--accent-color);
+    color: white;
+}
+
+#book-3d-container {
+    min-width: 300px;
+}
