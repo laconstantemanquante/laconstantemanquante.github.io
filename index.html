@@ -951,6 +951,42 @@
         <!--        <h3 class="en">Social Networks</h3>-->
 
       </section>
+
+      <section id="contact" class="container">
+        <div id="contact-wrapper">
+          <form id="contact-form"
+                action="https://formspree.io/f/xgvnzvga"
+                method="POST"
+                novalidate>
+            <fieldset>
+              <h2 class="fr">Contact</h2>
+              <h2 class="en">Contact</h2>
+
+              <label class="fr" for="c-email">Votre email</label>
+              <label class="en" for="c-email">Your email</label>
+              <input id="c-email" name="email" type="email" required autocomplete="email" />
+
+              <label class="fr" for="c-message">Message</label>
+              <label class="en" for="c-message">Message</label>
+              <textarea id="c-message" name="message" rows="6" required></textarea>
+
+              <!-- Honeypot anti-spam -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+
+              <!-- Facultatif: sujet -->
+              <input type="hidden" name="_subject" value="Contact — La constante manquante">
+
+              <div class="actions">
+                <button type="submit" class="button fr">Envoyer</button>
+                <button type="submit" class="button en">Send</button>
+              </div>
+
+              <!-- Zone d’état pour lecteurs d’écran -->
+              <p id="contact-status" aria-live="polite" class="visually-hidden"></p>
+            </fieldset>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer class="container">
@@ -1234,6 +1270,119 @@
       }
     </script>
 
+    <script defer>
+      (function () {
+        const form = document.getElementById('contact-form');
+        const wrapper = document.getElementById('contact-wrapper');
+        const status = document.getElementById('contact-status');
+
+        function currentLang() {
+          const l = document.body.getAttribute('data-lang');
+          return (l === 'en') ? 'en' : 'fr';
+        }
+
+        function successMarkup(lang) {
+          return `
+        <div class="contact-success">
+          <h3 class="en">
+            Message sent.
+          </h3>
+          <h3 class="fr">
+            Message envoyé.
+          </h3>
+          <p class="fr">Merci ! Votre message a bien été transmis. Je reviens vers vous dès que possible. ;)</p>
+          <p class="en">Thank you! Your message has been sent. I’ll get back to you as soon as possible.</p>
+        </div>
+      `;
+        }
+
+        function errorMarkup(lang) {
+          return `
+        <div class="contact-error">
+          <h3 class="${lang === 'en' ? 'en' : 'fr'}">
+            ${lang === 'en' ? 'Send failed' : 'Envoi impossible'}
+          </h3>
+          <p class="fr">Une erreur est survenue. Réessayez plus tard.</p>
+          <p class="en">Something went wrong. Please try again later.</p>
+        </div>
+      `;
+        }
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const lang = currentLang();
+          const btn = form.querySelector('button[type="submit"].' + lang) || form.querySelector('button[type="submit"]');
+          const original = btn.textContent;
+
+          btn.disabled = true;
+          btn.textContent = (lang === 'en') ? 'Sending…' : 'Envoi…';
+          status.textContent = (lang === 'en') ? 'Sending' : 'Envoi en cours';
+
+          try {
+            const data = new FormData(form);
+            const res = await fetch(form.action, {
+              method: 'POST',
+              body: data,
+              headers: { 'Accept': 'application/json' }
+            });
+
+            if (res.ok) {
+              wrapper.innerHTML = successMarkup(lang);
+            } else {
+              // Formspree renvoie JSON { errors: [...] } en cas d’erreur
+              let msg = '';
+              try {
+                const j = await res.json();
+                msg = (j && j.errors && j.errors.length) ? j.errors[0].message : '';
+              } catch {}
+              wrapper.innerHTML = errorMarkup(lang);
+              if (msg) {
+                const p = document.createElement('p');
+                p.className = (lang === 'en') ? 'en' : 'fr';
+                p.textContent = msg;
+                wrapper.querySelector('.contact-error').appendChild(p);
+              }
+            }
+          } catch {
+            wrapper.innerHTML = errorMarkup(currentLang());
+          } finally {
+            if (document.body.contains(btn)) {
+              btn.disabled = false;
+              btn.textContent = original;
+            }
+            status.textContent = '';
+          }
+        });
+      })();
+    </script>
+
+    <script defer>
+      (function () {
+        const form = document.getElementById('contact-form');
+        if (!form) return;
+
+        const email = form.querySelector('input[name="email"]');
+        const message = form.querySelector('textarea[name="message"]');
+        const submitButtons = form.querySelectorAll('button[type="submit"]');
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function checkFormState() {
+          const isValid =
+            emailRegex.test(email.value.trim()) &&
+            message.value.trim().length > 0;
+
+          submitButtons.forEach(btn => btn.disabled = !isValid);
+        }
+
+        // Init : désactive dès le départ
+        submitButtons.forEach(btn => btn.disabled = true);
+
+        // Écouteurs sur les deux champs
+        email.addEventListener('input', checkFormState);
+        message.addEventListener('input', checkFormState);
+      })();
+    </script>
 
   </body>
 </html>

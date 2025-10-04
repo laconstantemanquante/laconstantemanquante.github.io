@@ -357,3 +357,23 @@ aside a:hover{
 #book-3d-container {
     min-width: 300px;
 }
+
+/* Intégration LAF */
+#contact fieldset { border: 1px solid color-mix(in oklab, currentColor 16%, transparent); border-radius: .5rem; padding: 1rem; }
+#contact legend { color: var(--accent-color); font-weight: 600; }
+#contact .actions { margin-top: .75rem; text-align: right; }
+#contact .button { display: inline-block; padding: .55rem 1rem; border: 1px solid var(--accent-color); background: transparent; color: var(--accent-color); border-radius: .5rem; text-decoration: none; }
+#contact .button:hover, #contact .button:focus { background: var(--accent-color); color: #fff; }
+
+.contact-success, .contact-error {
+    border: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+    background: color-mix(in oklab, Canvas 92%, black 8%);
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+/* Bilingue, s’appuie sur ta règle globale [data-lang] */
+[data-lang="fr"] #contact .en { display: none; }
+[data-lang="en"] #contact .fr { display: none; }
