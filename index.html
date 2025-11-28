@@ -55,6 +55,13 @@
         // Sinon, on affiche la bannière (défaut)
       });
 
+      function clickOnInternalLink(anchorName) {
+        console.info(document.getElementById(anchorName)?.tagName);
+        (document.getElementById(anchorName)?.tagName === "DETAILS") && (document.getElementById(anchorName).open = true);
+
+        toggleMobileMenu();
+
+      }
       function toggleMobileMenu() {
         document.getElementById('mobileMenu').classList.toggle('open');
       }
@@ -83,14 +90,16 @@
           <div class="nav-left">
             <strong class="fr">La constante manquante</strong>
             <strong class="en">The missing constant</strong>
-            <a href="#book" onclick="toggleMobileMenu()" class="fr">Le livre</a>
-            <a href="#book" onclick="toggleMobileMenu()" class="en">The book</a>
-            <a href="#characters" onclick="toggleMobileMenu()" class="fr">Les personnages</a>
-            <a href="#characters" onclick="toggleMobileMenu()" class="en">Characters</a>
-            <a href="#links" onclick="toggleMobileMenu()" class="fr">Liens</a>
-            <a href="#links" onclick="toggleMobileMenu()" class="en">Links</a>
-            <a href="#author" onclick="toggleMobileMenu()" class="fr">Note d'intention</a>
-            <a href="#author" onclick="toggleMobileMenu()" class="en">Author's Note</a>
+            <a href="#book" onclick="clickOnInternalLink('book')" class="fr">Le livre</a>
+            <a href="#book" onclick="clickOnInternalLink('book')" class="en">The book</a>
+            <a href="#characters" onclick="clickOnInternalLink('characters')" class="fr">Principaux personnages</a>
+            <a href="#characters" onclick="clickOnInternalLink('characters')" class="en">Main characters</a>
+            <a href="#links" onclick="clickOnInternalLink('links')" class="fr">Liens</a>
+            <a href="#links" onclick="clickOnInternalLink('links')" class="en">Links</a>
+            <a href="#author" onclick="clickOnInternalLink('author')" class="fr">Note d'intention</a>
+            <a href="#author" onclick="clickOnInternalLink('author')" class="en">Author's Note</a>
+            <a href="#contact" onclick="clickOnInternalLink('contact')" class="fr">Contact & Presse</a>
+            <a href="#contact" onclick="clickOnInternalLink('contact')" class="en">Contact & Press</a>
           </div>
         </div>
         <div class="nav-right">
@@ -273,9 +282,16 @@
         and seeing your uniqueness as a strength. For anyone who’s ever felt unseen, not enough… this story is yours
         too.🤟
       </article>
+
       <section id="testimonials" aria-labelledby="testimonials-title">
         <!-- FR -->
         <ul class="testimonials fr" role="list">
+          <li>
+            <q>Nous avons lu et vous
+              recommandons vivement <img width="24px" src="love-hands.svg"/> ce roman (...)
+              il nous a touché par sa justesse et sa sensibilité.</q>
+            <img src="logo-tetecou.png" width="180px" alt="logo filière TETECOU" style="text-align: center"/><br/>
+          </li>
           <li>
             <q>Une histoire juste et délicate. C'est tendre, lucide et bienveillant. Et ca fait du bien !</q>
             <footer>S.</footer>
@@ -297,6 +313,11 @@
 
         <!-- EN -->
         <ul class="testimonials en" role="list">
+          <li>
+            <q>We’ve read this novel and highly recommend it <img width="24px" src="love-hands.svg"/> (…) its honesty
+              and sensitivity truly moved us.</q>
+            <img src="logo-tetecou.png" width="180px" alt="logo filière TETECOU" style="text-align: center"/><br/>
+          </li>
           <li>
             <q>A gentle, honest, and clear-eyed story. It’s tender without being soft — and honestly, it just feels good
               to read.</q>
@@ -339,18 +360,27 @@
               </picture>
             </div>
 
-<!--            <figcaption class="cta-book fr">-->
-<!--              <a href="https://www.amazon.fr/dp/B0DN4PGWSD" target="_blank" rel="noopener noreferrer" class="button">-->
-<!--                Voir sur Amazon-->
-<!--              </a>-->
-<!--            </figcaption>-->
+            <!--            <figcaption class="cta-book fr">-->
+            <!--              <a href="https://www.amazon.fr/dp/B0DN4PGWSD" target="_blank" rel="noopener noreferrer" class="button">-->
+            <!--                Voir sur Amazon-->
+            <!--              </a>-->
+            <!--            </figcaption>-->
 
             <figcaption class="cta-book en">
-<!--              <a href="https://www.amazon.com/dp/B0FTFYS1B5" target="_blank" rel="noopener noreferrer" class="button">-->
-<!--                View on Amazon-->
-<!--              </a>-->
-              <a href="https://www.amazon.com/missing-constant-S-Nichele/dp/B0FTFZJ4TL/ref=tmm_pap_swatch_0" target="_blank" rel="noopener noreferrer" class="button">
-                View on Amazon
+              <!--              <a href="https://www.amazon.com/dp/B0FTFYS1B5" target="_blank" rel="noopener noreferrer" class="button">-->
+              <!--                View on Amazon-->
+              <!--              </a>-->
+              <a href="https://www.amazon.com/missing-constant-S-Nichele/dp/B0FTFZJ4TL/ref=tmm_pap_swatch_0"
+                 target="_blank" rel="noopener noreferrer" class="button">
+                Buy it
+              </a>
+            </figcaption>
+            <figcaption class="cta-book fr">
+              <!--              <a href="https://www.amazon.com/dp/B0FTFYS1B5" target="_blank" rel="noopener noreferrer" class="button">-->
+              <!--                View on Amazon-->
+              <!--              </a>-->
+              <a href="#links" rel="noopener noreferrer" class="button">
+                Acheter
               </a>
             </figcaption>
 
@@ -419,9 +449,11 @@
 
       </section>
 
-      <section id="characters">
-        <h2 class="fr">Les personnages</h2>
-        <h2 class="en">Characters</h2>
+      <details id="characters">
+        <summary>
+          <h2 class="fr">Les personnages</h2>
+          <h2 class="en">Characters</h2>
+        </summary>
 
         <div class="illustrated-paragraph start">
           <figure>
@@ -736,14 +768,52 @@
 
         </div>
 
+      </details>
 
-      </section>
+      <details id="links">
+        <summary>
+          <h2 class="fr">Liens</h2>
+          <h2 class="en">Links</h2>
+        </summary>
+        <h3 class="fr">Acheter le livre</h3>
+        <h3 class="en">Buy the book</h3>
 
+        <p class="en">
+          <a target="_blank" href="https://www.amazon.com/dp/B0FTFYS1B5" rel="noopener noreferrer">
+            Paperback and Ebook
+          </a>
+        </p>
+        <div class="fr">
+          <p><a target="_blank" rel="noopener noreferrer"
+                href="https://livres.bookelis.com/romans/69118-La-constante-manquante.html">
+            Format papier (296 pages) ou Ebook (Bookelis)
+          </a></p>
 
-      <section id="author">
+          <p><a target="_blank" rel="noopener noreferrer" href="https://www.amazon.fr/dp/B0DN4PGWSD/ref=sr_1_1">
+            Ebook (Amazon)
+          </a></p>
+
+          <p><a target="_blank" rel="noopener noreferrer"
+                href="https://www.kobo.com/fr/fr/ebook/la-constante-manquante">
+            Ebook (Kobo)
+          </a></p>
+
+          <p><a target="_blank" rel="noopener noreferrer"
+                href="https://books.apple.com/fr/book/la-constante-manquante/id6746246391">
+            Ebook (Apple Books)
+          </a></p>
+        </div>
+        <!--        <h3 class="fr">Réseaux</h3>-->
+        <!--        <h3 class="en">Social Networks</h3>-->
+
+      </details>
+      <details id="author">
+        <summary>
+          <h2 class="fr">Note d'intention</h2>
+          <h2 class="en">Author’s Note</h2>
+        </summary>
         <div class="fr">
           <article>
-            <h4>Note d'intention</h4>
 
             <p>
               Cette histoire suit un parcours profondément personnel — celui d’une jeune fille en quête de confiance, de
@@ -836,8 +906,6 @@
 
         <div class="en">
           <article>
-            <h4>Author’s Note</h4>
-
             <p>
               This story follows a deeply personal journey — that of a young girl searching for confidence, meaning, and
               a sense of place in the world. <strong>Alicia</strong> isn’t a role model or a symbol. She’s simply a
@@ -917,57 +985,33 @@
 
           </article>
         </div>
-      </section>
+      </details>
 
-      <section id="links">
-        <h2 class="fr">Liens</h2>
-        <h2 class="en">Links</h2>
-        <h3 class="fr">Acheter le livre</h3>
-        <h3 class="en">Buy the book</h3>
-
-        <p class="en">
-          <a target="_blank" href="https://www.amazon.com/dp/B0FTFYS1B5" rel="noopener noreferrer">
-            Paperback and Ebook
-          </a>
-        </p>
-        <div class="fr">
-          <p><a target="_blank" rel="noopener noreferrer"
-                href="https://livres.bookelis.com/romans/69118-La-constante-manquante.html">
-            Format papier (296 pages) ou Ebook (Bookelis)
+      <details id="contact">
+        <summary>
+          <h2 class="fr">Contact & Presse</h2>
+          <h2 class="en">Contact & Press </h2>
+        </summary>
+        <div id="contact-wrapper" class="container">
+          <p class="fr"><a href="la_constante_manquante_dossier_presse.pdf"
+                           target="_blank" rel="noopener noreferrer">
+            <img src="la_constante_manquante_dossier_presse.png" width="60px"/> Dossier de presse (PDF)
           </a></p>
-
-          <p><a target="_blank" rel="noopener noreferrer" href="https://www.amazon.fr/dp/B0DN4PGWSD/ref=sr_1_1">
-            Ebook (Amazon)
+          <p class="en"><a href="The_Missing_Constant_press_kit_202511.pdf"
+                           target="_blank" rel="noopener noreferrer">
+            <img src="the_missing_constant_press_kit.png" width="60px"/> Press kit (PDF)
           </a></p>
-
-          <p><a target="_blank" rel="noopener noreferrer"
-                href="https://www.kobo.com/fr/fr/ebook/la-constante-manquante">
-            Ebook (Kobo)
-          </a></p>
-
-          <p><a target="_blank" rel="noopener noreferrer"
-                href="https://books.apple.com/fr/book/la-constante-manquante/id6746246391">
-            Ebook (Apple Books)
-          </a></p>
-        </div>
-        <!--        <h3 class="fr">Réseaux</h3>-->
-        <!--        <h3 class="en">Social Networks</h3>-->
-
-      </section>
-
-      <section id="contact" class="container">
-        <div id="contact-wrapper">
+          <p>&nbsp;</p>
           <form id="contact-form"
                 action="https://formspree.io/f/xgvnzvga"
                 method="POST"
                 novalidate>
             <fieldset>
-              <h2 class="fr">Contact</h2>
-              <h2 class="en">Contact</h2>
-
+              <h3 class="fr">Pour m'envoyer un message</h3>
+              <h3 class="en">To send me a message</h3>
               <label class="fr" for="c-email">Votre email</label>
               <label class="en" for="c-email">Your email</label>
-              <input id="c-email" name="email" type="email" required autocomplete="email" />
+              <input id="c-email" name="email" type="email" required autocomplete="email"/>
 
               <label class="fr" for="c-message">Message</label>
               <label class="en" for="c-message">Message</label>
@@ -989,7 +1033,7 @@
             </fieldset>
           </form>
         </div>
-      </section>
+      </details>
     </main>
 
     <footer class="container">
@@ -1062,11 +1106,15 @@
         document.documentElement.style.setProperty('--font-scale', savedFontScale)
       }
 
+      // err.... this should be done in pure css, bro...
       function updateScrollMargin() {
         const header = document.querySelector('header')
         const headerHeight = header.offsetHeight
 
         document.querySelectorAll('section[id]').forEach(section => {
+          section.style.scrollMarginTop = `${headerHeight + 16}px` // petit offset visuel
+        })
+        document.querySelectorAll('details[id]').forEach(section => {
           section.style.scrollMarginTop = `${headerHeight + 16}px` // petit offset visuel
         })
       }
@@ -1326,7 +1374,7 @@
             const res = await fetch(form.action, {
               method: 'POST',
               body: data,
-              headers: { 'Accept': 'application/json' }
+              headers: {'Accept': 'application/json'}
             });
 
             if (res.ok) {
@@ -1337,7 +1385,8 @@
               try {
                 const j = await res.json();
                 msg = (j && j.errors && j.errors.length) ? j.errors[0].message : '';
-              } catch {}
+              } catch {
+              }
               wrapper.innerHTML = errorMarkup(lang);
               if (msg) {
                 const p = document.createElement('p');

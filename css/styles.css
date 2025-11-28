@@ -260,13 +260,13 @@ aside a:hover{
     padding-left: 0 !important;
     margin: 0;
     position: relative;
-    isolation: isolate;
+    /*isolation: isolate;*/
     /* hauteur fixe du slot d’affichage (adapter si besoin) */
-    --slot-h: 5rem;
+    --slot-h: 8rem;
     min-height: var(--slot-h);
 }
 #testimonials ul.testimonials li::marker { content: ""; }
-#testimonials ul.testimonials li { list-style: none; }
+#testimonials ul.testimonials li { list-style: none;}
 
 /* Cartes */
 #testimonials q {
@@ -276,8 +276,6 @@ aside a:hover{
 }
 #testimonials footer {
     font-size: .9em;
-    float: right;
-    margin-top: 1rem;
     color: color-mix(in oklab, currentColor 65%, transparent);
 }
 
@@ -286,33 +284,37 @@ aside a:hover{
     position: absolute;
     inset: 0;
     padding: .9rem 1rem;
-    /*border: 1px solid color-mix(in oklab, currentColor 14%, transparent);*/
-    /*border-radius: .75rem;*/
-    /*background: color-mix(in oklab, Canvas 92%, black 8%);*/
     opacity: 0;
+    text-align: center;
     transform: translateY(8px);
-    animation: tslide 16s infinite ease-in-out;
-    /* Anti-reflow : force la hauteur visuelle du slot */
-    /*min-height: var(--slot-h);*/
-/*    display: grid;
-    align-content: start;
-    gap: .35rem;*/
+    animation: tslide 25s infinite ease-in-out;
+
+    /* ALIGNEMENT VERTICAL 💡*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
 
 /* Séquencement automatique par nth-child (4 items → 4 étapes) */
 #testimonials ul.testimonials li:nth-child(1) { animation-delay: 0s; }
-#testimonials ul.testimonials li:nth-child(2) { animation-delay: 4s; }
-#testimonials ul.testimonials li:nth-child(3) { animation-delay: 8s; }
-#testimonials ul.testimonials li:nth-child(4) { animation-delay: 12s; }
+#testimonials ul.testimonials li:nth-child(2) { animation-delay: 5s; }
+#testimonials ul.testimonials li:nth-child(3) { animation-delay: 10s; }
+#testimonials ul.testimonials li:nth-child(4) { animation-delay: 15s; }
+#testimonials ul.testimonials li:nth-child(5) { animation-delay: 20s; }
 
 /* Keyframes : fade + léger slide. Temps visible ~3s, transition ~1s. */
 @keyframes tslide {
     0%   { opacity: 0; transform: translateY(8px); }
-    6%   { opacity: 1; transform: translateY(0); }
-    25%  { opacity: 1; transform: translateY(0); }
-    31%  { opacity: 0; transform: translateY(-6px); }
+    4%   { opacity: 1; transform: translateY(0); }     /* fin fade-in */
+    16%  { opacity: 1; transform: translateY(0); }     /* visible 3s */
+    20%  { opacity: 0; transform: translateY(-6px); }  /* fin fade-out */
     100% { opacity: 0; transform: translateY(-6px); }
 }
+
 
 /* Respect reduced-motion */
 @media (prefers-reduced-motion: reduce) {
@@ -377,3 +379,20 @@ aside a:hover{
 /* Bilingue, s’appuie sur ta règle globale [data-lang] */
 [data-lang="fr"] #contact .en { display: none; }
 [data-lang="en"] #contact .fr { display: none; }
+
+
+details summary h2 {
+    margin: 0;
+}
+
+details summary::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(225, 202, 136)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    width: 24px;
+    height: 24px;
+
+    /* ← Taille (ajuste comme tu veux) */
+    background-size: 100% 100%; /* occupe tout */
+
+    /* Facultatif : un peu d'espace avec le texte */
+    margin-top: -1.5rem;
+}
