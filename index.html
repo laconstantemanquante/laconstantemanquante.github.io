@@ -1131,6 +1131,10 @@
         zone.classList.toggle("paused");
       });
 
+      window.addEventListener("scroll", () => {
+        zone.classList.remove("paused");
+      });
+
     </script>
 
     <!-- Chargement de THREE.js (UMD) -->
