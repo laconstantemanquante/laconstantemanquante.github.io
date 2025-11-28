@@ -62,6 +62,7 @@
         toggleMobileMenu();
 
       }
+
       function toggleMobileMenu() {
         document.getElementById('mobileMenu').classList.toggle('open');
       }
@@ -335,6 +336,7 @@
             <q>I wish I’d had this in high school. One of those stories that stays with you.</q>
             <footer>E.</footer>
           </li>
+        </ul>
       </section>
 
 
@@ -1124,16 +1126,26 @@
       window.addEventListener('resize', updateScrollMargin)
 
 
-      // Pauser le scroll des testimonials au survol / pointer
+      // Pause / reprise du carrousel de témoignages
       const zone = document.getElementById("testimonials");
 
-      zone.addEventListener("click", () => {
-        zone.classList.toggle("paused");
-      });
+      if (zone) {
+        const pause  = () => zone.classList.add("paused");
+        const resume = () => zone.classList.remove("paused");
 
-      window.addEventListener("scroll", () => {
-        zone.classList.remove("paused");
-      });
+        // 👉 Appui dans la zone => pause
+        zone.addEventListener("pointerdown", pause);
+
+        // 👉 Tap / click ailleurs sur la page => reprise
+        document.addEventListener("pointerdown", (e) => {
+          if (!zone.contains(e.target)) {
+            resume();
+          }
+        });
+
+        // 👉 Scroll de la page => reprise aussi
+        window.addEventListener("scroll", resume, { passive: true });
+      }
 
     </script>
 
