@@ -317,9 +317,11 @@ aside a:hover{
 
 #testimonials.paused ul.testimonials li {
     animation-play-state: paused;
+    filter: sepia(50%);
 }
 #testimonials:hover ul.testimonials li {
     animation-play-state: paused;
+    filter: sepia(50%);
 }
 
 /* Respect reduced-motion */

@@ -1127,9 +1127,9 @@
       // Pauser le scroll des testimonials au survol / pointer
       const zone = document.getElementById("testimonials");
 
-      zone.addEventListener("pointerdown", () => zone.classList.add("paused"));
-      zone.addEventListener("pointerup",   () => zone.classList.remove("paused"));
-      zone.addEventListener("pointerleave",() => zone.classList.remove("paused"));
+      zone.addEventListener("click", () => {
+        zone.classList.toggle("paused");
+      });
 
     </script>
 
